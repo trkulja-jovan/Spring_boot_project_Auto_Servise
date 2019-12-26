@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+.generalije, .licni-podaci {
+	
+	border: solid;
+	border-radius: 10px;
+	border-color: #0cc71f;
+	margin-left: 15px;
+	
+}
+
+.generalije h4, .licni-podaci h4 {
+	
+	color: red;
+}
+
+.generalije h3, .licni-podaci h3 {
+	
+	color: blue;
+}
+
+.okvir {
+	margin: 15px;
+}
+
+.okvir h6{
+	text-decoration: underline;
+	color: black;
+}
