@@ -31,7 +31,7 @@
         		</li>
 
         		<li class="nav-item">
-          			<a class="nav-link sidesecnd" href="">
+          			<a class="nav-link sidesecnd" href="${pageContext.request.contextPath}/admin/getRadnici">
             			<span class="textside">Zaposleni</span>
           			</a>
         		</li>
@@ -59,12 +59,7 @@
             			<span class="textside">Izveštaji</span>
           			</a>
         		</li>
-        		
-        		<li class="nav-item">
-          			<a class="nav-link sidesix" href="${pageContext.request.contextPath}/logout">
-            			<span class="textside">Odjava</span>
-          			</a>
-        		</li>
+
       		</ul>
       
     	</div>

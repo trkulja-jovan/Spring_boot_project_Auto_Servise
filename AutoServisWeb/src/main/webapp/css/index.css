@@ -21,6 +21,7 @@ body {
 
 .logg pre {
 	color: red;
+	font-size: 1.17em;
 	margin-left: 15px;
 }
 
@@ -28,6 +29,7 @@ body {
 	color: blue;
 	margin-left: 15px;
 }
+
 
 .fixed-top {
   position: fixed;

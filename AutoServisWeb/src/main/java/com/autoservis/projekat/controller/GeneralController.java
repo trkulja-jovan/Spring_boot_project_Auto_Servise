@@ -36,15 +36,12 @@ public class GeneralController {
 		request.getSession().setAttribute("radnikPass", pass);
 		
 		List<Radnik> radnici = rr.findAll();
-		request.getSession().setAttribute("radnici", radnici);
 		request.getSession().setAttribute("brRadnika", radnici.size());
 		
-		List<Popravka> popravkeCekanje = pr.getPopravkaByStatus("U procesu");
-		request.getSession().setAttribute("popCekanje", popravkeCekanje);
+		List<Popravka> popravkeCekanje = pr.getPopravkaByStatus("Čeka");
 		request.getSession().setAttribute("brCekanjePop", popravkeCekanje.size());
 		
-		List<Popravka> popravkePopravlja = pr.getPopravkaByStatus("Čeka");
-		request.getSession().setAttribute("popProces", popravkePopravlja);
+		List<Popravka> popravkePopravlja = pr.getPopravkaByStatus("U procesu");
 		request.getSession().setAttribute("brPopravlja", popravkePopravlja.size());
 		
 		return "index";

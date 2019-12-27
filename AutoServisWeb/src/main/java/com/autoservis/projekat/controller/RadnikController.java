@@ -1,6 +1,7 @@
 package com.autoservis.projekat.controller;
 
-import java.util.Objects;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.autoservis.projekat.repository.RadnikRepository;
 
 import model.Radnik;
+import model.Uloga;
 
 @Controller
 @RequestMapping(value = "/")
@@ -21,33 +23,47 @@ public class RadnikController {
 	@Autowired
 	private RadnikRepository rr;
 	
-	@RequestMapping(value = "/getRadnik")
+	@RequestMapping(value = "/admin/getRadnici")
 	public String getRadnikPodaci(HttpServletRequest request) {
 		
+		List<Radnik> radnici = rr.findAll()
+				                 .stream()
+				                 .filter(e -> !(e.getUloga().getNazivUloge().equals("ADMIN")))
+				                 .collect(Collectors.toList());
 		
-		return "myProfile";
+		request.getSession().setAttribute("zaposleni", radnici);
+
+		return "zaposleni";
 	}
 	
-	@RequestMapping(value = "/admin/changeData", method = RequestMethod.POST)
-	public String changeData(String kor_ime_novo, String pass_novo, String pass_novo1, HttpServletRequest request) {
-
-		if(Objects.deepEquals(pass_novo, pass_novo1)) {
+	@RequestMapping(value = "/admin/registerWorker", method=RequestMethod.POST)
+	public String addUser(String ime, String prezime, String kvalif, String korIme, String password, 
+						  HttpServletRequest request) {
+		
+		try {
 			
-			Radnik radnik = (Radnik) request.getSession().getAttribute("radnik");
+			Radnik r = new Radnik();
 			
-			radnik.setKorIme(kor_ime_novo);
+			r.setIme(ime);
+			r.setPrezime(prezime);
+			r.setKvalifikacije(kvalif);
+			r.setKorIme(korIme);
 			
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	     	radnik.setPassword(passwordEncoder.encode(pass_novo));
+			r.setPassword(passwordEncoder.encode(password));
 			
-			rr.save(radnik);
+			Uloga u = new Uloga();
+			u.setIdUloga(2);
+			
+			r.setUloga(u);
+			
+			rr.save(r);
 			
 			request.getSession().setAttribute("uspesno", true);
 			
-		} else {
-			request.getSession().setAttribute("podacilosi", true);
+		} catch(Exception e) {
+			request.getSession().setAttribute("uspesno", false);
 		}
-		
-		return "myProfile";
+		return "zaposleni";
 	}
 }

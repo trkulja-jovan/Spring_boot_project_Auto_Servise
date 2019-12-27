@@ -25,7 +25,7 @@
 				</li>
 				
         		<li class="nav-item">
-          			<a class="nav-link sidefrst" href="">
+          			<a class="nav-link sidefrst" href="/AutoServis/pages/myProfile.jsp">
             			<span class="textside">Moj profil</span>
           			</a>
         		</li>
@@ -45,12 +45,6 @@
         		<li class="nav-item">
           			<a class="nav-link sidesforth" href="">
             			<span class="textside">Klijenti i vozila</span>
-          			</a>
-        		</li>
-        		
-        		<li class="nav-item">
-          			<a class="nav-link sidesix" href="${pageContext.request.contextPath}/logout">
-            			<span class="textside">Odjava</span>
           			</a>
         		</li>
       		</ul>

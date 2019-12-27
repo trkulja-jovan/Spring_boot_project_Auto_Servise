@@ -22,7 +22,7 @@
   	<%@include file="meniAdmin.jsp"%>
   	  <div class="content-wrapper">
   	  	<div class="logg">
-  	  		<pre>Dobrodošao ${radnik.ime} ${radnik.prezime}</pre>
+  	  		<pre>Dobrodošao: ${radnik.ime} ${radnik.prezime}</pre>
     		<h3>Ulogovani ste kao: ADMINISTRATOR</h3>
     	</div>
       	<div class="container-fluid">
@@ -49,15 +49,7 @@
                 			</div>
                 			<div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
                     			<h4>Popravke u toku</h4>
-                    			<c:if test="${!empty popProces}">
-                    				<c:forEach var="p" items="${popProces}">
-                    					<h2>Popravka: ${p.opisPopravke}</h2>
-                    					<h3>Datum prijema: ${p.datumPrijema}</h3>
-                    				</c:forEach>
-                    			</c:if>
-                    			<c:if test="${empty popProces}">
-                    				<h2>0</h2>
-                    			</c:if>
+                    				<h2>${brPopravlja}</h2>
                 			</div>
               			</div>
             		</div>
@@ -71,12 +63,7 @@
                 			</div>
                 			<div class="col-lg-9 col-md-8 col-sm-8 col-8 fontstyyy">
                 				<h4>Popravke na čekanju</h4>
-                    			<c:if test="${!empty popCekanje}">
                     				<h2>${brCekanjePop}</h2>
-                    			</c:if>
-                    			<c:if test="${empty popCekanje}">
-                    				<h2>0</h2>
-                    			</c:if>
                 			</div>
               			</div>
             		</div>
@@ -92,8 +79,8 @@
   	<%@include file="meniRadnik.jsp"%>
   	<div class="content-wrapper">
   	  	<div class="logg">
-  	  		<pre>Dobrodošao ${radnik.ime} ${radnik.prezime}</pre>
-    		<h2>Ulogovani ste kao: RADNIK</h2>
+  	  		<pre>Dobrodošao: ${radnik.ime} ${radnik.prezime}</pre>
+    		<h3>Ulogovani ste kao: RADNIK</h3>
     	</div>
     </div>
   </sec:authorize>

@@ -49,41 +49,43 @@
   	  			<h6>Vodite računa o vašim ličnim podacima</h6>
   	  		</div>
   	  	</div>
-  	  	
-  	  	<pre><br><br></pre>
-  	  	
-  	  	<div class="forma">
-  	  		
-  	  		<form action="AutoServis/admin/changeData" method="post">
-  	  			
-  	  			Unesite novo korisničko ime: <input type="text" name="kor_ime_novo" required> <br> <br>
-  	  			Unesite novu lozinku: 		 <input type="password" name="pass_novo" required><br><br>
-  	  			Ponovite lozinku:			 <input type="password" name="pass_novo1" required><br><br>
-  	  			
-  	  			<input type="submit" value="Promeni podatke">
-  	  	
-  	  		</form>
-  	  	
-  	  	</div>
       	
 	</div>
-	
-	<c:if test="${uspesno}">
-		<script type="text/javascript">
-			alert("Uspešno ste promenili vaše podatke");
-		</script>
-	</c:if>
-	<c:if test="${podacilosi}">
-		<script type="text/javascript">
-			alert("Greška prilikom izmene ličnih podataka");
-		</script>
-	</c:if>
   	
   </sec:authorize>
   
   <sec:authorize access="hasRole('WORKER')">
   
   	<%@include file="meniRadnik.jsp"%>
+  	
+  	<div class="content-wrapper">
+  	  	
+  	  	<div class="generalije">
+  	  		<div class="okvir">
+  	  			<h3>Ime</h3>
+  	  			<h4>${radnik.ime}</h4>
+  	  		
+  	  			<h3>Prezime</h3>
+  	  			<h4>${radnik.prezime}</h4>
+  	  		
+  	  			<h3>Kvalifikacije</h3>
+  	  			<h4>${radnik.kvalifikacije}</h4>
+  	  		</div>
+  	  	</div>
+  	  	<pre><br><br></pre>
+  	  	<div class="licni-podaci">
+  	  		<div class="okvir">
+  	  			<h3>Korisničko ime</h3>
+  	  			<h4>${radnik.korIme}</h4>
+  	  		
+  	  			<h3>Lozinka</h3>
+  	  			<h4>${radnikPass}</h4>
+  	  			
+  	  			<h6>Vodite računa o vašim ličnim podacima</h6>
+  	  		</div>
+  	  	</div>
+      	
+	</div>
   	
   </sec:authorize>
   
