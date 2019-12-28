@@ -61,7 +61,6 @@
 				<div class="dugmici">
 					
 					<button onclick="showForm()" class="dugme">Zaposli novog radnika</button>
-					<button class="dugme">Otpusti radnika</button>
 				
 				</div>
 				
@@ -99,8 +98,15 @@
 							</tr>
 							
 							<tr>
-								<td><br></td>
+								<td><pre><br><br></pre></td>
 								<td><input type="submit" value="Registruj novog radnika"></td>
+							</tr>
+							
+							<tr>
+								<td>
+									<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" /> 
+								</td>
 							</tr>
 						
 						</table>
@@ -109,14 +115,16 @@
 						
 				</div>
 				
-				<div class="ispisi">
+				<div class="zaposleni">
 					
 					<c:if test="${uspesno}">
+						<pre><br><br><br></pre>
 						<h3 class="uspeloh3">Uspešno ste registrovali novog radnika.</h3>
 						<h4 class="uspeloh4">Srećan rad.</h4>
 					</c:if>
 					
 					<c:if test="${uspesno == false}">
+						<pre><br><br><br></pre>
 						<h3 class="greskah3">Greška prilikom registracije novog radnika.</h3>
 						<h4 class="greskah4">Proverite unete parametre</h4>
 					</c:if>
