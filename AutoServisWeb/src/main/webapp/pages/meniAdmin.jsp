@@ -37,7 +37,7 @@
         		</li>
         		
         		<li class="nav-item">
-          			<a class="nav-link sidesthrd" href="">
+          			<a class="nav-link sidesthrd" href="${pageContext.request.contextPath}/admin/getPopravke">
             			<span class="textside">Popravke</span>
           			</a>
         		</li>

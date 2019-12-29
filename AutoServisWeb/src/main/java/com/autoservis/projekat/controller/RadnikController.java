@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,8 +23,11 @@ public class RadnikController {
 	@Autowired
 	RadnikRepository rr;
 	
-	@RequestMapping(value = "/admin/getRadnici")
-	public String getRadnikPodaci(HttpServletRequest request) {
+	@Autowired
+	HttpServletRequest request;
+	
+	@GetMapping("/admin/getRadnici")
+	public String getRadnikPodaci() {
 		
 		List<Radnik> radnici = rr.findByRole("WORKER");
 		
@@ -32,9 +36,8 @@ public class RadnikController {
 		return "zaposleni";
 	}
 
-	@PostMapping(value = "/admin/registerWorker")
-	public String dodajRadnika( String ime, String prezime, String kvalif, String korIme, String password,
-						  HttpServletRequest request) {
+	@PostMapping("/admin/registerWorker")
+	public String dodajRadnika( String ime, String prezime, String kvalif, String korIme, String password) {
 		
 		try {
 			
