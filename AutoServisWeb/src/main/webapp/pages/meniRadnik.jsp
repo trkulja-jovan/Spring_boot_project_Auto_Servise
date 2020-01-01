@@ -37,8 +37,8 @@
         		</li>
         		
         		<li class="nav-item">
-          			<a class="nav-link sidesthrd" href="">
-            			<span class="textside">Unos popravki</span>
+          			<a class="nav-link sidesthrd" href="/AutoServis/pages/editPopravke.jsp">
+            			<span class="textside">Unos i izmena popravki</span>
           			</a>
         		</li>
         		

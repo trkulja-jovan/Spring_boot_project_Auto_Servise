@@ -41,8 +41,13 @@ public class UslugaController {
 		
 		request.getSession().setAttribute("uspesnoUsluga", true);
 		
-		return "usluge";
+		return "redirect:/admin/uslugePage";
 		
+	}
+	
+	@GetMapping("/admin/uslugePage")
+	public String page() {
+		return "usluge";
 	}
 	
 	@GetMapping("/admin/getUsluge")

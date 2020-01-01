@@ -24,6 +24,11 @@ public class RadnikController {
 	@Autowired
 	HttpServletRequest request;
 	
+	@GetMapping("/admin/radnikPage")
+	public String page() {
+		return "zaposleni";
+	}
+	
 	@GetMapping("/admin/getRadnici")
 	public String getRadnikPodaci() {
 		
@@ -39,7 +44,14 @@ public class RadnikController {
 		
 		try {
 			
-			Radnik r = new Radnik();
+			var postojiR = rr.findByKorIme(korIme);
+			
+			if(postojiR != null) {
+				request.getSession().setAttribute("greskaRadnik", true);
+				return "greske";
+			}
+			
+			var r = new Radnik();
 			
 			r.setIme(ime);
 			r.setPrezime(prezime);
@@ -49,9 +61,8 @@ public class RadnikController {
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			r.setPassword(passwordEncoder.encode(password));
 			
-			Uloga u = new Uloga();
+			var u = new Uloga();
 			u.setIdUloga(2);
-			
 			r.setUloga(u);
 			
 			rr.save(r);
@@ -64,6 +75,6 @@ public class RadnikController {
 			return "greske";
 		}
 		
-		return "zaposleni";
+		return "redirect:/admin/radnikPage";
 	}
 }

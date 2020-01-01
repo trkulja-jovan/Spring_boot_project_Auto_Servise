@@ -43,5 +43,21 @@ public class GeneralController {
 		
 		return "index";
 	}
+	
+	@GetMapping("/refreshData")
+	public String getRefreshData() {
+		
+		var l = pr.getPopravkaBroj("Čeka");
+		var l2 = pr.getPopravkaBroj("U procesu");
+		
+		var rad = rr.count();
+		
+		request.getSession().setAttribute("brCekanjePop", l);
+		request.getSession().setAttribute("brPopravlja", l2);
+		request.getSession().setAttribute("brRadnika", rad);
+		
+		return "index";
+	}
+	
 
 }

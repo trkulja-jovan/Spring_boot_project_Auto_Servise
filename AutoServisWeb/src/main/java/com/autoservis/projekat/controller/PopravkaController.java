@@ -49,11 +49,5 @@ public class PopravkaController {
 		return "detalji";
 	}
 	
-	@GetMapping("/worker/detaljiPopravke")
-	public String detaljiRadnik(Integer id) {
-		
-		return "detalji";
-	}
-	
 
 }

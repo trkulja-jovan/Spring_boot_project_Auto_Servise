@@ -31,7 +31,7 @@
 			<div class="content-wrapper">
 			
 				<div class="naslov">
-					<h3>Unos usluge</h3>
+					<h3>Usluge i cenovnici</h3>
 				</div>
 				
 				<div class="dugmici">
