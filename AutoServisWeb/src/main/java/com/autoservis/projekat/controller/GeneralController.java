@@ -11,8 +11,6 @@ import com.autoservis.projekat.repository.PopravkaRepository;
 import com.autoservis.projekat.repository.RadnikRepository;
 import com.autoservis.projekat.session.Session;
 
-import model.Radnik;
-
 @Controller
 @RequestMapping("/")
 public class GeneralController {
@@ -29,13 +27,13 @@ public class GeneralController {
 	@GetMapping("/getAll")
 	public String getAllValues() {
 		
-		Radnik r = Session.getRadnik();
-     	String pass = Session.getPass();
+		var r = Session.getRadnik();
+     	var pass = Session.getPass();
      	
-		Long l = pr.getPopravkaBroj("Čeka");
-		Long l2 = pr.getPopravkaBroj("U procesu");
+		var l = pr.getPopravkaBroj("Čeka");
+		var l2 = pr.getPopravkaBroj("U procesu");
 		
-		Long rad = rr.count();
+		var rad = rr.count();
 		
 		request.getSession().setAttribute("brCekanjePop", l);
 		request.getSession().setAttribute("brPopravlja", l2);

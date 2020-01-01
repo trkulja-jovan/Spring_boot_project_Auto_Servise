@@ -1,7 +1,5 @@
 package com.autoservis.projekat.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +27,7 @@ public class RadnikController {
 	@GetMapping("/admin/getRadnici")
 	public String getRadnikPodaci() {
 		
-		List<Radnik> radnici = rr.findByRole("WORKER");
+		var radnici = rr.findByRole("WORKER");
 		
 		request.getSession().setAttribute("zaposleni", radnici);
 
@@ -37,7 +35,7 @@ public class RadnikController {
 	}
 
 	@PostMapping("/admin/registerWorker")
-	public String dodajRadnika( String ime, String prezime, String kvalif, String korIme, String password) {
+	public String dodajRadnika(String ime, String prezime, String kvalif, String korIme, String password) {
 		
 		try {
 			
@@ -62,7 +60,8 @@ public class RadnikController {
 
 		} catch(Exception e) {
 			e.printStackTrace();
-			request.getSession().setAttribute("uspesno", false);
+			request.getSession().setAttribute("greskaRadnik", true);
+			return "greske";
 		}
 		
 		return "zaposleni";

@@ -7,8 +7,18 @@
   background: transparent;
 }
 
+.usluge {
+	margin-right: 25%;
+
+}
+
+.usluge .uspeloh3{
+	font-weight: bold;
+	color: #1a24b8;
+}
+
 .naslov {
-	margin-left: 25%;
+	margin-left: 40%;
 	margin-top: 5%;
 	margin-bottom: 5%;
 }
@@ -28,10 +38,12 @@
 .dugmici {
 
 	margin-top: 5%;
+	margin-bottom: 5%;
 }
 
 .forma {
 	margin-top: 5%;
+	margin-bottom: 3%;
 }
 
 .form-register label {

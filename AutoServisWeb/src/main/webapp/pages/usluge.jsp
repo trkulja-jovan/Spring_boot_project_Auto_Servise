@@ -76,6 +76,24 @@
 						
 				</div>
 				
+				<div class="usluge">
+					
+					<c:if test="${uspesnoUsluga}">
+						<pre><br></pre>
+						
+						<script type="text/javascript">
+							var forma = document.getElementById("form");
+							if(forma.style.display === "block"){
+								forma.style.display = "none";
+							}
+						</script>
+						
+						<h3 class="uspeloh3">Uspešno ste dodali uslugu.</h3>
+						<pre><br></pre>
+					</c:if>
+
+				</div>
+				
 				<div class="tabela">
 			
 					<table class="redTable">

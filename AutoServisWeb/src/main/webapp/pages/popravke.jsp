@@ -101,7 +101,6 @@
 								<th>Datum prijema</th>
 								<th>Datum završetka</th>
 								<th>Status popravke</th>
-								<th>Pogledaj detalje</th>
 							</tr>
 						</thead>
 					    <c:if test="${not empty mojePopravke}">
@@ -114,9 +113,6 @@
 										<td>${p.datumPrijema}</td>
 										<td>${p.datumZavrsetka}</td>
 										<td>${p.status.opis}</td>
-										<td>
-											<a href="/AutoServis/worker/detaljiPopravke?id=${p.idPopravka}">Detalji</a>
-										</td>
 									</tr>
 						
 								</c:forEach>
@@ -130,8 +126,7 @@
 									<td>U bazi</td>
 									<td>nisu evidentirane</td>
 									<td>ni jedne</td>
-									<td>popravke</td>
-									<td>:(</td>
+									<td>popravke :(</td>
 								</tr>
 							
 							</tbody>

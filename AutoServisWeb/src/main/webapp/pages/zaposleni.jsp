@@ -122,13 +122,7 @@
 						<h3 class="uspeloh3">Uspešno ste registrovali novog radnika.</h3>
 						<h4 class="uspeloh4">Srećan rad.</h4>
 					</c:if>
-					
-					<c:if test="${uspesno == false}">
-						<pre><br><br><br></pre>
-						<h3 class="greskah3">Greška prilikom registracije novog radnika.</h3>
-						<h4 class="greskah4">Proverite unete parametre</h4>
-					</c:if>
-				
+
 				</div>
 			</div>
 			

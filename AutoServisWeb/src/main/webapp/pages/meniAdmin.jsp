@@ -43,7 +43,7 @@
         		</li>
         		
         		<li class="nav-item">
-          			<a class="nav-link sidesforth" href="">
+          			<a class="nav-link sidesforth" href="${pageContext.request.contextPath}/admin/getUsluge">
             			<span class="textside">Usluge i cenovnici</span>
           			</a>
         		</li>
