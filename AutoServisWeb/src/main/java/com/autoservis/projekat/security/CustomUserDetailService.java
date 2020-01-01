@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import com.autoservis.projekat.repository.RadnikRepository;
 import com.autoservis.projekat.session.Session;
 
-import model.Radnik;
-
 @Service("customUserDetailsService")
 public class CustomUserDetailService implements UserDetailsService {
 
@@ -25,14 +23,14 @@ public class CustomUserDetailService implements UserDetailsService {
 	@Override    
 	public UserDetails loadUserByUsername(String kor_ime) throws UsernameNotFoundException {
 
-		Radnik r = rr.findByKorIme(kor_ime);
+		var r = rr.findByKorIme(kor_ime);
 		
 		if(r != null) {
 			
 			Session.setRadnik(r);
 			Session.setPass(request.getParameter("password"));
 
-			UserDetailImpl userDetail = new UserDetailImpl();
+			var userDetail = new UserDetailImpl();
 
 			userDetail.setUsername(r.getKorIme());
 			userDetail.setPassword(r.getPassword());

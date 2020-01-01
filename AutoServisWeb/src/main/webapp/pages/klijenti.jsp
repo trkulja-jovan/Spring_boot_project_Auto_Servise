@@ -107,6 +107,17 @@
 	
 	</sec:authorize>
 	
+	<sec:authorize access="hasRole('WORKER')">
+		
+		<!-- IMPLEMENTIRATI UNOS KLIJENTA I VOZILA:
+			
+			IZ COMBO-BOXA UZIMA SE KLIJENT. UKOLIKO NE POSTOJI UNOSI SE NOVI
+			NA OSNOVU IZABRANOG KLIJENTA UNOSI SE VOZILO
+		
+		 -->
+	
+	</sec:authorize>
+	
 	<sec:authorize access="!isAuthenticated()">
 		<%@include file="notLogged.jsp"%>
 	</sec:authorize>

@@ -138,7 +138,6 @@
 	
 		</sec:authorize>
 	
-	
 	</sec:authorize>
 	
 	<sec:authorize access="!isAuthenticated()">

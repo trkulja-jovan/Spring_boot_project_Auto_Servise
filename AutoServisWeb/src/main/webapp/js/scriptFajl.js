@@ -11,3 +11,11 @@ function showForm() {
 		y.style.display === "none";
 	}
 }
+
+function showFormPopravka(){
+	// Prikazati formu nakon klika na radioButton 
+}
+
+function showFormIzmena(){
+	// Prikazati formu za izmenu popravke
+}
