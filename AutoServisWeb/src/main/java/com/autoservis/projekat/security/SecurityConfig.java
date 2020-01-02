@@ -42,10 +42,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .loginProcessingUrl("/login")
         .defaultSuccessUrl("/getAll")
         .failureForwardUrl("/pages/failure.jsp")
-        .and().logout().and()
+        .and()
+        .logout()
+        .invalidateHttpSession(true)
+        .logoutSuccessUrl("/pages/login.jsp")
+        .and()
         .exceptionHandling()
         .accessDeniedPage("/pages/access_denied.jsp")
-        .and()
+        .and().rememberMe().and()
         .csrf();
 	}
 

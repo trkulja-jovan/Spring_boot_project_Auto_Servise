@@ -23,6 +23,15 @@ public class UslugaController {
 	@PostMapping("/admin/addUsluga")
 	public String addUsluga(String nazUsluge, String cena) {
 		
+		var usluga = ur.findByNazivUsluge(nazUsluge);
+		
+		if(usluga != null) {
+			request.getSession().setAttribute("greskaUsluga", true);
+			return "greske";
+		}
+		
+		usluga = null;
+		
 		var parsCena = 0.0;
 		
 		try {
@@ -41,13 +50,8 @@ public class UslugaController {
 		
 		request.getSession().setAttribute("uspesnoUsluga", true);
 		
-		return "redirect:/admin/uslugePage";
+		return "redirect:/admin/getUsluge";
 		
-	}
-	
-	@GetMapping("/admin/uslugePage")
-	public String page() {
-		return "usluge";
 	}
 	
 	@GetMapping("/admin/getUsluge")

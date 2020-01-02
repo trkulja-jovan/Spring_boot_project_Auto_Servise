@@ -121,6 +121,7 @@
 						<pre><br><br><br></pre>
 						<h3 class="uspeloh3">Uspešno ste registrovali novog radnika.</h3>
 						<h4 class="uspeloh4">Srećan rad.</h4>
+						<c:remove var = "uspesno"/>
 					</c:if>
 
 				</div>

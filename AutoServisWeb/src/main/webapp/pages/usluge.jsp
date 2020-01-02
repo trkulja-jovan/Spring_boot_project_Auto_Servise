@@ -89,7 +89,7 @@
 						</script>
 						
 						<h3 class="uspeloh3">Uspešno ste dodali uslugu.</h3>
-						<pre><br></pre>
+						<c:remove var = "uspesnoUsluga"/>
 					</c:if>
 
 				</div>

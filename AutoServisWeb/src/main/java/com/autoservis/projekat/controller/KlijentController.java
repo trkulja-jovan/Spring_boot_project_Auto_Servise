@@ -5,9 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.autoservis.projekat.repository.KlijentRepository;
 import com.autoservis.projekat.repository.VoziloRepository;
+
+import model.Vlasnik;
 
 @Controller
 public class KlijentController {
@@ -21,24 +24,46 @@ public class KlijentController {
 	@Autowired
 	VoziloRepository vr;
 	
-	@GetMapping("/admin/getKlijenti")
-	public String klijenti() {
-		
-		var klijenti = kr.findAll();
-		
-		request.getSession().setAttribute("klijenti", klijenti);
-		
+	@GetMapping("/worker/klijentiPage")
+	public String klijentiPage() {
 		return "klijenti";
 	}
-	
+
 	@GetMapping("/admin/detaljiKlijenta")
 	public String vozilaK(Integer idV) {
 		
-		var vozilaK = vr.findByVlasnik(idV);
+		var klijent = kr.findById(idV).get();
+		request.getSession().setAttribute("k", klijent);
 		
-		request.getSession().setAttribute("vozila", vozilaK);
+		var vozila = vr.findByVlasnik(idV);
+		request.getSession().setAttribute("vozila", vozila);
 		
 		return "klijenti";
+		
+	}
+	
+	@PostMapping("/worker/addKlijent")
+	public String addKlijent(String ime, String prez, String mesto) {
+		
+		try {
+			
+			var vlasnik = new Vlasnik();
+			
+			vlasnik.setIme(ime);
+			vlasnik.setPrezime(prez);
+			vlasnik.setMesto(mesto);
+			
+			kr.save(vlasnik);
+			
+			request.getSession().setAttribute("uspesnoKlijent", true);
+			
+			return "redirect:/getKlijenti";
+			
+		} catch(Exception e) {
+			
+			request.getSession().setAttribute("greskaKlijent", true);
+			return "greske";
+		}
 	}
 
 }

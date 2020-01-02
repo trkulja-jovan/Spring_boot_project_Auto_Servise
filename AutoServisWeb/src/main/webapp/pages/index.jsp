@@ -19,11 +19,18 @@
 <sec:authorize access="isAuthenticated()">
 
   <sec:authorize access="hasRole('ADMIN')">
+  	
   	<%@include file="meniAdmin.jsp"%>
   	  <div class="content-wrapper">
   	  	<div class="logg">
   	  		<pre>Dobrodošao: ${radnik.ime} ${radnik.prezime}</pre>
     		<h3>Ulogovani ste kao: ADMINISTRATOR</h3>
+    		
+    		<form action="${pageContext.request.contextPath}/logout" method="post">
+    			<input class="submit" type="submit" value="Odjava">
+    			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+    		</form>
+    		
     	</div>
       	<div class="container-fluid">
       		<div class="row">
@@ -71,7 +78,7 @@
     		</div>
   		</div>
 	</div>
-  
+
   </sec:authorize>
   
   <sec:authorize access="hasRole('WORKER')">

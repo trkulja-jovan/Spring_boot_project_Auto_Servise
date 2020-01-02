@@ -24,7 +24,8 @@
 				<h1>Oops!</h1>
 				<div class="error-heading">500</div>
 				<p>Greška prilikom dodavanja usluge. <br> Proverite podatke!</p>
-				<p><a href="/AutoServis/pages/index.jsp">Povratak na početnu stranicu</a></p>
+				<p><a href="/AutoServis/admin/refreshData">Povratak na početnu stranicu</a></p>
+				<c:remove var = "greskaUsluga"/>
 			</div>
 		</c:if>
 		
@@ -33,10 +34,35 @@
 				<h1>Oops!</h1>
 				<div class="error-heading">500</div>
 				<p>Greška prilikom dodavanja radnika. <br> Proverite podatke!</p>
-				<p><a href="/AutoServis/pages/index.jsp">Povratak na početnu stranicu</a></p>
+				<p><a href="/AutoServis/admin/refreshData">Povratak na početnu stranicu</a></p>
+				<c:remove var = "greskaRadnik"/>
+			</div>
+		</c:if>
+		
+		<c:if test="${greskaKlijent}">
+			<div class="error-main">
+				<h1>Oops!</h1>
+				<div class="error-heading">500</div>
+				<p>Greška prilikom dodavanja klijenta. <br> Proverite podatke!</p>
+				<p><a href="/AutoServis/worker/refreshData">Povratak na početnu stranicu</a></p>
+				<c:remove var = "greskaKlijent"/>
+			</div>
+		</c:if>
+		
+		<c:if test="${greskaVozilo}">
+			<div class="error-main">
+				<h1>Oops!</h1>
+				<div class="error-heading">500</div>
+				<p>Greška prilikom dodavanja vozila. <br> Proverite podatke!</p>
+				<p><a href="/AutoServis/worker/refreshData">Povratak na početnu stranicu</a></p>
+				<c:remove var = "greskaVozilo"/>
 			</div>
 		</c:if>
 	
+	</sec:authorize>
+	
+	<sec:authorize access="!isAuthenticated()">
+		<%@include file="notLogged.jsp"%>
 	</sec:authorize>
 </body>
 </html>

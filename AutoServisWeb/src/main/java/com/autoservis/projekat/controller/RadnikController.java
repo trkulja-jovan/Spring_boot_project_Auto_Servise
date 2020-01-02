@@ -58,7 +58,7 @@ public class RadnikController {
 			r.setKvalifikacije(kvalif);
 			r.setKorIme(korIme);
 			
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			var passwordEncoder = new BCryptPasswordEncoder();
 			r.setPassword(passwordEncoder.encode(password));
 			
 			var u = new Uloga();

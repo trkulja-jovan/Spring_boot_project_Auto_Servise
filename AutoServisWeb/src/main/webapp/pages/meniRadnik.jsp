@@ -38,12 +38,12 @@
         		
         		<li class="nav-item">
           			<a class="nav-link sidesthrd" href="/AutoServis/pages/editPopravke.jsp">
-            			<span class="textside">Unos i izmena popravki</span>
+            			<span class="textside">Popravke</span>
           			</a>
         		</li>
         		
         		<li class="nav-item">
-          			<a class="nav-link sidesforth" href="">
+          			<a class="nav-link sidesforth" href="${pageContext.request.contextPath}/getKlijenti">
             			<span class="textside">Klijenti i vozila</span>
           			</a>
         		</li>

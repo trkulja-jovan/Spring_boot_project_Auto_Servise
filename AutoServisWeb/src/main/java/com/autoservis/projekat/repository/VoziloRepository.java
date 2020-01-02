@@ -10,7 +10,10 @@ import model.Vozilo;
 
 public interface VoziloRepository extends JpaRepository<Vozilo, Integer>{
 	
-	@Query("select v from Vozilo v where v.vlasnik.idVlasnik like :id")
+	@Query("select v from Vozilo v where v.vlasnik.idVlasnik = :id")
 	public List<Vozilo> findByVlasnik(@Param("id") Integer id);
+	
+	@Query("select v from Vozilo v where v.regTablice like :regTab")
+	public Vozilo findByRegTablice(@Param("regTab") String regTab);
 
 }

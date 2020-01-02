@@ -19,7 +19,7 @@
     		
         	<ul class="navbar-nav navbar-sidenav">
 				<li>
-          			<a href="${pageContext.request.contextPath}/refreshData" class="nav-link navlogo text-center">
+          			<a href="${pageContext.request.contextPath}/admin/refreshData" class="nav-link navlogo text-center">
             			<img src="/AutoServis/images/app-icon.png">
           			</a>
 				</li>
@@ -49,7 +49,7 @@
         		</li>
         		
         		<li class="nav-item">
-          			<a class="nav-link sidesfifth" href="${pageContext.request.contextPath}/admin/getKlijenti">
+          			<a class="nav-link sidesfifth" href="${pageContext.request.contextPath}/getKlijenti">
             			<span class="textside">Klijenti i vozila</span>
           			</a>
         		</li>
