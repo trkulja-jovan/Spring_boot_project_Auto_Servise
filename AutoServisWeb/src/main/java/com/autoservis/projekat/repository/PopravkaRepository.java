@@ -19,5 +19,8 @@ public interface PopravkaRepository extends JpaRepository<Popravka, Integer>{
 	@Query("select p from Popravka p inner join p.radniks r where r.korIme like :korIme")
 	public List<Popravka> getPopravkeZaRadnika(@Param("korIme") String korIme);
 	
+	@Query("select p from Popravka p inner join p.radniks r where p.status.opis like :status and r.korIme like :korIme")
+	public List<Popravka> getPopravkeZaRadnikaStatus(@Param("status") String status, @Param("korIme") String korIme);
+	
 
 }

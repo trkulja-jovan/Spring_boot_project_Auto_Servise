@@ -19,7 +19,7 @@
     		
         	<ul class="navbar-nav navbar-sidenav">
 				<li>
-          			<a href="/AutoServis/pages/index.jsp" class="nav-link navlogo text-center">
+          			<a href="${pageContext.request.contextPath}/worker/refreshData" class="nav-link navlogo text-center">
             			<img src="/AutoServis/images/app-icon.png">
           			</a>
 				</li>
@@ -37,7 +37,7 @@
         		</li>
         		
         		<li class="nav-item">
-          			<a class="nav-link sidesthrd" href="/AutoServis/pages/editPopravke.jsp">
+          			<a class="nav-link sidesthrd" href="${pageContext.request.contextPath}/worker/getVozila">
             			<span class="textside">Popravke</span>
           			</a>
         		</li>

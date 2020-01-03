@@ -20,11 +20,17 @@ function showForm() {
 }
 
 function showFormPopravka(){
-	// Prikazati formu nakon klika na radioButton 
-}
-
-function showFormIzmena(){
-	// Prikazati formu za izmenu popravke
+	
+	var formaPopravka = document.getElementById("formPopravka");
+	var formaEdit = document.getElementById("formEdit");
+	
+	if(formaPopravka.style.display === "none"){
+		formaPopravka.style.display = "block";
+		formaEdit.style.display = "none";
+	} else if(formaEdit.style.display === "none"){
+		formaEdit.style.display = "block";
+		formaPopravka.style.display = "none";
+	} 
 }
 
 function showFormVozilo(){

@@ -32,7 +32,7 @@
     		</form>
     		
     	</div>
-      	<div class="container-fluid">
+      <div class="container-fluid">
       		<div class="row">
         		<div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-2 mt-4">
             		<div class="inforide">
@@ -77,6 +77,49 @@
         		</div>
     		</div>
   		</div>
+  		
+  		<div class="ispisi">
+  		
+  			<c:if test="${not empty popravkeCekanje}">
+  				
+  				<div class="forma" id="form">
+  					<form action="${pageContext.request.contextPath}/admin/changePopravkaData" method="post"
+  					       class="form-register">
+  						
+  						<table>
+  							<c:forEach var="p" items="${popravkeCekanje}">
+  								<tr>
+  									<td>
+  										<label>Zahtev za popravku: ${p.opisPopravke} | ${p.datumPrijema}</label> 
+  										<input type="hidden" name="idPopravka" value="${p.idPopravka}">
+  									</td>
+  									
+  									<td>
+  										<input type="submit" value="Odobri">
+  									</td>
+  								</tr>
+  							</c:forEach>
+  							<tr>
+								<td>
+									<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" /> 
+								</td>
+							</tr>
+  						</table>
+  					</form>
+  				</div>
+  			
+  			</c:if>
+  			
+  			<c:if test="${empty popravkeCekanje}">
+  				<h3 class="uspeloh3">Nemate popravki na čekanju za odobrenje</h3>
+  			</c:if>
+  			
+  			<c:if test="${uspesnoOdobreno}">
+  				<h3 class="uspeloh3">Uspešno ste odobrili rad.</h3>
+				<c:remove var = "uspesnoOdobreno"/>
+  			</c:if>
+  		</div>
 	</div>
 
   </sec:authorize>
@@ -88,6 +131,73 @@
   	  	<div class="logg">
   	  		<pre>Dobrodošao: ${radnik.ime} ${radnik.prezime}</pre>
     		<h3>Ulogovani ste kao: RADNIK</h3>
+    		
+    		<form action="${pageContext.request.contextPath}/logout" method="post">
+    			<input class="submit" type="submit" value="Odjava">
+    			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+    		</form>
+    	</div>
+    	
+    	<div class="ispisi">
+    		
+    		<c:if test="${not empty mojePopravkeCeka}">
+    			
+    			<h3>Moje popravke u statusu čekanja:</h3>
+    			<c:forEach var="p" items="${mojePopravkeCeka}">
+    				
+    				<h4>${p.opisPopravke} | ${p.datumPrijema} | ${p.status.opis}</h4>
+    			
+    			</c:forEach>
+    		</c:if>
+    		
+    		<c:if test="${empty mojePopravkeCeka}">
+  				<h3 class="uspeloh3">Nemate popravki na čekanju za odobrenje</h3>
+  			</c:if>
+			
+			<c:if test="${not empty mojePopravkeOdobreno}">
+    			
+    			<h3>Odobrene popravke:</h3>
+    			<div class="forma" id="form">
+    			<form action="${pageContext.request.contextPath}/worker/changePopravkaData" method="post"
+    				  class="form-register">
+    			
+    				<table>
+    					
+    					<c:forEach var="p" items="${mojePopravkeOdobreno}">
+  								<tr>
+  									<td>
+  										<label>${p.opisPopravke} | ${p.datumPrijema} | ${p.status.opis}</label> 
+  										<input type="hidden" name="idPopravka" value="${p.idPopravka}">
+  									</td>
+  									
+  									<td>
+  										<input type="submit" value="Započni rad">
+  									</td>
+  								</tr>
+  							</c:forEach>
+    					
+    					<tr>
+							<td>
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" /> 
+							</td>
+						</tr>
+    				
+    				</table>
+    			
+    			</form>
+    			</div>
+    			<c:remove var = "mojePopravkeOdobreno"/>
+    		</c:if>
+    		
+    		<c:if test="${empty mojePopravkeOdobreno}">
+  				<h3 class="uspeloh3">Nemate odobrenih popravki</h3>
+  			</c:if>
+  			
+    		<c:if test="${uspesnoZapoceto}">
+  				<h3 class="uspeloh3">Možete početi rad. Srećno!</h3>
+				<c:remove var = "uspesnoZapoceto"/>
+  			</c:if>
     	</div>
     </div>
   </sec:authorize>

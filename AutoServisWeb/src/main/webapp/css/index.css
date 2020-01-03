@@ -9,6 +9,45 @@ body {
   background-color: #EEEEEE;
 }
 
+.ispisi {
+	
+	margin-bottom: 5%;
+	margin-top: 5%;
+}
+
+.ispisi h3 {
+	font-weight: bold;
+	color: green;
+}
+
+.ispisi h4{
+	text-decoration: underline;
+	margin-left: 5%;
+	color: black;
+}
+
+.ispisi .uspeloh3{
+	font-weight: bold;
+	color: #1a24b8;
+}
+
+.forma {
+	margin-top: 5%;
+	margin-bottom: 3%;
+}
+
+.form-register label {
+	color: black;
+	font-weight: bold;
+}
+
+.form-register input[type="submit"]{
+	background-color: #008CBA;
+	font-size: 17px;
+	color: white;
+	margin: 10%;
+}
+
 .textside {
   margin-left: 25px;
 }

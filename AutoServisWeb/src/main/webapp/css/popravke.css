@@ -19,6 +19,17 @@
 	font-weight: bold;
 }
 
+.dugme {
+	background-color: #008CBA;
+	font-size: 20px;
+	color: white;
+}
+
+.dugmici {
+
+	margin-top: 5%;
+}
+
 .redTable a{
 	text-decoration: underline;
 	color: black;

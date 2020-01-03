@@ -33,15 +33,31 @@ public class GeneralController {
 		
 		var r = Session.getRadnik();
 		var pass = Session.getPass();
-     	
-		var l = pr.getPopravkaBroj("Čeka");
-		var l2 = pr.getPopravkaBroj("U procesu");
 		
-		var rad = rr.count();
+		if(r.getUloga().getNazivUloge().equals("WORKER")) {
+			
+			var mojePopravke = pr.getPopravkeZaRadnikaStatus("Čeka", r.getKorIme());
+			request.getSession().setAttribute("mojePopravkeCeka", mojePopravke);
+			
+			var mojePopravkeOdobreno = pr.getPopravkeZaRadnikaStatus("Odobreno", r.getKorIme());
+			request.getSession().setAttribute("mojePopravkeOdobreno", mojePopravkeOdobreno);
+			
+		} else {
+	     	
+			var l = pr.getPopravkaBroj("Čeka");
+			var l2 = pr.getPopravkaBroj("U procesu");
+			
+			var rad = rr.count();
+			
+			var popravkeCekanje = pr.getPopravkaByStatus("Čeka");
+			
+			request.getSession().setAttribute("popravkeCekanje", popravkeCekanje);
+			request.getSession().setAttribute("brCekanjePop", l);
+			request.getSession().setAttribute("brPopravlja", l2);
+			request.getSession().setAttribute("brRadnika", rad);
+
+		}
 		
-		request.getSession().setAttribute("brCekanjePop", l);
-		request.getSession().setAttribute("brPopravlja", l2);
-		request.getSession().setAttribute("brRadnika", rad);
 		request.getSession().setAttribute("radnik", r);
 		request.getSession().setAttribute("radnikPass", pass);
 		
@@ -56,6 +72,9 @@ public class GeneralController {
 		
 		var rad = rr.count();
 		
+		var popravkeCekanje = pr.getPopravkaByStatus("Čeka");
+		
+		request.getSession().setAttribute("popravkeCekanje", popravkeCekanje);
 		request.getSession().setAttribute("brCekanjePop", l);
 		request.getSession().setAttribute("brPopravlja", l2);
 		request.getSession().setAttribute("brRadnika", rad);
@@ -70,7 +89,15 @@ public class GeneralController {
 		 * smisliti sta jos
 		 */
 		
-		return "";
+		String korIme = Session.getRadnik().getKorIme();
+		
+		var mojePopravke = pr.getPopravkeZaRadnikaStatus("Čeka", korIme);
+		var popravkeRadi = pr.getPopravkeZaRadnikaStatus("U procesu", korIme);
+		
+		request.getSession().setAttribute("mojePopravkeCeka", mojePopravke);
+		request.getSession().setAttribute("mojePopravkeRadi", popravkeRadi);
+
+		return "index";
 	}
 	
 	@GetMapping("/getKlijenti")
