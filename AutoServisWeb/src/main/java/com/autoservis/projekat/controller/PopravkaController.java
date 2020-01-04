@@ -26,146 +26,185 @@ import model.Status;
 
 @Controller
 public class PopravkaController {
-	
+
 	@Autowired
 	HttpServletRequest request;
-	
+
 	@Autowired
 	PopravkaRepository pr;
-	
+
 	@Autowired
 	VoziloRepository vr;
-	
+
 	@GetMapping("/admin/getPopravke")
 	public String getPopravke() {
-		
+
 		var popravke = pr.findAll();
-		
+
 		request.getSession().setAttribute("svePopravke", popravke);
-		
+
 		return "popravke";
-		
+
 	}
-	
+
 	@GetMapping("/worker/getMojePopravke")
 	public String getRadnikPopravke() {
-		
+
 		var r = (Radnik) request.getSession().getAttribute("radnik");
-		
+
 		var lista = pr.getPopravkeZaRadnika(r.getKorIme());
-		
+
 		request.getSession().setAttribute("mojePopravke", lista);
-		
+
 		return "popravke";
-		
+
 	}
-	
+
 	@GetMapping("/admin/detaljiPopravke")
 	public String detalji(Integer id) {
-		
+
 		return "detalji";
 	}
-	
+
 	@PostMapping("/worker/addPopravka")
 	public String addPopravka(String opis, Date datum, Integer vozilo) {
-		
+
 		try {
-			
+
 			Date tren = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
-			
-			if(datum.before(tren)) {
+
+			if (datum.before(tren)) {
 				request.getSession().setAttribute("greskaPopravka", true);
 				return "greske";
 			}
-			
+
 			var popravka = new Popravka();
 			popravka.setDatumPrijema(datum);
 			popravka.setDatumZavrsetka(datum);
 			popravka.setOpisPopravke(opis);
-			
+
 			var status = new Status();
 			status.setIdStatus(1);
-			
+
 			popravka.setStatus(status);
-			
-			var radnik = new ArrayList<Radnik>();
-			radnik.add(Session.getRadnik());
-			
-			popravka.setRadniks(radnik);
-			
+
+			var radnici = new ArrayList<Radnik>();
+			radnici.add(Session.getRadnik());
+
+			popravka.setRadniks(radnici);
+
 			pr.save(popravka);
-			
+
 			request.getSession().setAttribute("uspesnoPopravka", true);
-			
+
 			return "redirect:/worker/editPopravkePage";
-			
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			request.getSession().setAttribute("greskaPopravka", true);
 			return "greske";
 		}
 	}
-	
+
 	@GetMapping("/worker/editPopravkePage")
 	public String getPopravkePage() {
 		return "editPopravke";
 	}
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	    sdf.setLenient(true);
-	    binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		sdf.setLenient(true);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
 	}
-	
+
 	@PostMapping("/worker/changePopravkaData")
 	public String changePopravka(Integer idPopravka) {
-		
+
 		try {
-			
+
 			var popravka = pr.findById(idPopravka).get();
 			var status = new Status();
 			status.setIdStatus(2);
 			
-			popravka.setStatus(status);
-			
-			
-			popravka.setStatus(status);
-			
-			pr.save(popravka);
-			
-			request.getSession().setAttribute("uspesnoZapoceto", true);
-			
-		} catch(Exception e) {
+			var radnik = Session.getRadnik();
+			if(popravka.getRadniks().contains(radnik)) {
+				
+				popravka.setStatus(status);
+				pr.save(popravka);
+				request.getSession().setAttribute("uspesnoZapoceto", true);
+				
+			} else {
+				
+				popravka.getRadniks().add(radnik);
+				pr.save(popravka);
+				request.getSession().setAttribute("uspesnoZapoceto", true);
+			}
+
+		} catch (Exception e) {
 			request.getSession().setAttribute("greskaPopravka", true);
 			return "greske";
 		}
-		
+
 		return "redirect:/worker/getMojePopravke";
 	}
-	
+
 	@PostMapping("/admin/changePopravkaData")
 	public String changePopravkaAdmin(Integer idPopravka) {
-		
+
 		try {
-			
+
 			var popravka = pr.findById(idPopravka).get();
+
 			var status = new Status();
 			status.setIdStatus(4);
-			
+
 			popravka.setStatus(status);
-			
+
 			pr.save(popravka);
-			
+
 			request.getSession().setAttribute("uspesnoOdobreno", true);
-			
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			request.getSession().setAttribute("greskaPopravka", true);
 			return "greske";
 		}
-		
+
 		return "redirect:/admin/refreshData";
 	}
-	
+
+	@PostMapping("/worker/changePopravkaPridru")
+	public String changePopravkaPridruzivanje(Integer popravka) {
+
+		try {
+
+			var popravka2 = pr.findById(popravka).get();
+			var status = new Status();
+			status.setIdStatus(5);
+
+			popravka2.setStatus(status);
+
+			pr.save(popravka2);
+
+			request.getSession().setAttribute("uspesnoPridruzivanje", true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.getSession().setAttribute("greskaPopravka", true);
+			return "greske";
+		}
+
+		return "editPopravke";
+	}
+
+	@GetMapping("/worker/getPopravke")
+	public String getPopravkeWorker() {
+
+		var popravke = pr.getPopravkaByStatus("U procesu");
+
+		request.getSession().setAttribute("popravke", popravke);
+
+		return "redirect:/worker/editPopravkePage";
+	}
 
 }

@@ -55,7 +55,7 @@
         		</li>
         						
         		<li class="nav-item">
-          			<a class="nav-link sidefrst" href="">
+          			<a class="nav-link sidesixth" href="">
             			<span class="textside">Izveštaji</span>
           			</a>
         		</li>

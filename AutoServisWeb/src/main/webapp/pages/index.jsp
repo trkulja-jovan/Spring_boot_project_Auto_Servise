@@ -111,6 +111,37 @@
   			
   			</c:if>
   			
+  			<c:if test="${not empty pridruzivanje}">
+  				
+  				<div class="forma" id="form">
+  					<form action="${pageContext.request.contextPath}/admin/changePopravkaData" method="post"
+  					       class="form-register">
+  						
+  						<table>
+  							<c:forEach var="p" items="${pridruzivanje}">
+  								<tr>
+  									<td>
+  										<label>Zahtev za pridruživanje popravci: ${p.opisPopravke} | ${p.datumPrijema}</label> 
+  										<input type="hidden" name="idPopravka" value="${p.idPopravka}">
+  									</td>
+  									
+  									<td>
+  										<input type="submit" value="Odobri pridruživanje">
+  									</td>
+  								</tr>
+  							</c:forEach>
+  							<tr>
+								<td>
+									<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" /> 
+								</td>
+							</tr>
+  						</table>
+  					</form>
+  				</div>
+  			
+  			</c:if>
+  			
   			<c:if test="${empty popravkeCekanje}">
   				<h3 class="uspeloh3">Nemate popravki na čekanju za odobrenje</h3>
   			</c:if>
@@ -119,6 +150,7 @@
   				<h3 class="uspeloh3">Uspešno ste odobrili rad.</h3>
 				<c:remove var = "uspesnoOdobreno"/>
   			</c:if>
+  		
   		</div>
 	</div>
 
@@ -148,10 +180,25 @@
     				<h4>${p.opisPopravke} | ${p.datumPrijema} | ${p.status.opis}</h4>
     			
     			</c:forEach>
+    			
+    			<pre><br><br></pre>
+    		</c:if>
+    		
+    		<c:if test="${not empty pridruzivanje}">
+    			
+    			<h3>Moje popravke u zahtevu pridruživanje:</h3>
+    			<c:forEach var="p" items="${pridruzivanje}">
+    				
+    				<h4>${p.opisPopravke} | ${p.datumPrijema} | ${p.status.opis}</h4>
+    			
+    			</c:forEach>
+    			
+    			<pre><br><br></pre>
     		</c:if>
     		
     		<c:if test="${empty mojePopravkeCeka}">
   				<h3 class="uspeloh3">Nemate popravki na čekanju za odobrenje</h3>
+  				<pre><br><br></pre>
   			</c:if>
 			
 			<c:if test="${not empty mojePopravkeOdobreno}">
@@ -174,7 +221,7 @@
   										<input type="submit" value="Započni rad">
   									</td>
   								</tr>
-  							</c:forEach>
+  						</c:forEach>
     					
     					<tr>
 							<td>
@@ -186,6 +233,39 @@
     				</table>
     			
     			</form>
+    			</div>
+    			</c:if>
+    			<c:if test="${not empty pridruzivanje}">
+    			<h3>Odobreni zahtevi za pridruživanje:</h3>
+    			<div class="forma" id="form">
+    				<form action="${pageContext.request.contextPath}/worker/changePopravkaData" method="post"
+    				  class="form-register">
+    			
+    					<table>
+    					
+    						<c:forEach var="p" items="${pridruzivanje}">
+  									<tr>
+  										<td>
+  											<label>${p.opisPopravke} | ${p.datumPrijema} | ${p.status.opis}</label> 
+  											<input type="hidden" name="idPopravka" value="${p.idPopravka}">
+  										</td>
+  									
+  										<td>
+  											<input type="submit" value="Započni rad">
+  										</td>
+  									</tr>
+  							</c:forEach>
+    					
+    						<tr>
+								<td>
+									<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" /> 
+								</td>
+							</tr>
+    				
+    					</table>
+    			
+    				</form>
     			</div>
     			<c:remove var = "mojePopravkeOdobreno"/>
     		</c:if>

@@ -13,6 +13,7 @@ body {
 	
 	margin-bottom: 5%;
 	margin-top: 5%;
+	margin-left: 15px;
 }
 
 .ispisi h3 {
@@ -22,7 +23,6 @@ body {
 
 .ispisi h4{
 	text-decoration: underline;
-	margin-left: 5%;
 	color: black;
 }
 
@@ -86,11 +86,11 @@ body {
 	border-radius: 10px;
 	text-align: center;
 	color: white;
-	font-size: 25px;
+	font-size: 20px;
 	background-color: blue;
 	margin-left: 15px;
 	margin-top: 10px;
-	width: 10em;  
+	width: 8em;  
 	height: 2em;
 }
 

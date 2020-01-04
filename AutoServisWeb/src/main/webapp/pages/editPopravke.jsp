@@ -36,6 +36,7 @@
 					
 					<button onclick="showFormPopravka()" class="dugme">Unesi popravku</button>
 					<button onclick="showFormPopravka()" class="dugme">Izmeni popravku</button>
+					<button onclick="showFormPridr()" class="dugme">Pridruži se popravci</button>
 				
 				</div>
 				
@@ -155,6 +156,45 @@
 						
 				</div>
 				
+				<div class="forma" id="formPridr" style="display: none">
+					
+					<form action="${pageContext.request.contextPath}/worker/changePopravkaPridru" 
+					      method="post" 
+					      class="form-register">
+						
+						<table>
+						
+							<tr>
+								<c:if test="${not empty popravke}">
+									<td><label>Izaberite popravku kojoj želite da se pridružite</label></td>
+									<td>
+										<select name="popravka">
+											<c:forEach var="p" items="${popravke}">
+												<option value="${p.idPopravka}">${p.opisPopravke} ${p.datumPrijema} ${p.datumZavrsetka} ${p.status.opis}
+											</c:forEach>
+										</select>
+									</td>
+								</c:if>
+							</tr>
+							
+							<tr>
+								<td><pre><br><br></pre></td>
+								<td><input type="submit" value="Pošaljite zahtev za pridruživanje"></td>
+							</tr>
+							
+							<tr>
+								<td>
+									<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" /> 
+								</td>
+							</tr>
+						
+						</table>
+					
+					</form>
+						
+				</div>
+				
 				<div class="ispisi">
 					
 					<c:if test="${uspesnoPopravka}">
@@ -170,6 +210,21 @@
 						<h3 class="uspeloh3">Uspešno ste dodali popravku. Čeka se odobrenje šefa.</h3>
 						<pre><br></pre>
 						<c:remove var = "uspesnoPopravka"/>
+					</c:if>
+					
+					<c:if test="${uspesnoPridruzivanje}">
+						<pre><br></pre>
+						
+						<script type="text/javascript">
+							var forma = document.getElementById("formPridr");
+							if(forma.style.display === "block"){
+								forma.style.display = "none";
+							}
+						</script>
+						
+						<h3 class="uspeloh3">Uspešno ste podneli zahtev za pridruživanje. Čeka se odobrenje šefa.</h3>
+						<pre><br></pre>
+						<c:remove var = "uspesnoPridruzivanje"/>
 					</c:if>
 				
 				</div>

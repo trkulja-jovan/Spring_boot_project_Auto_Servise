@@ -27,10 +27,24 @@ function showFormPopravka(){
 	if(formaPopravka.style.display === "none"){
 		formaPopravka.style.display = "block";
 		formaEdit.style.display = "none";
+		formaPridr.style.display = "none";
 	} else if(formaEdit.style.display === "none"){
+		formaPridr.style.display = "none";
 		formaEdit.style.display = "block";
 		formaPopravka.style.display = "none";
 	} 
+}
+
+var formaPridr = document.getElementById("formPridr");
+
+function showFormPridr() {
+	var formaPridr = document.getElementById("formPridr");
+	var formaPopravka = document.getElementById("formPopravka");
+	var formaEdit = document.getElementById("formEdit");
+	
+	formaPridr.style.display = "block";
+	formaPopravka.style.display = "none";
+	formaEdit.style.display = "none";
 }
 
 function showFormVozilo(){

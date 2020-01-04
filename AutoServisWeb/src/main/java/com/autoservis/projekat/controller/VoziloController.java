@@ -62,10 +62,10 @@ public class VoziloController {
 	public String getDataPopravka() {
 		
 		var vozila = vr.findAll();
-		
+
 		request.getSession().setAttribute("vozila", vozila);
 		
-		return "editPopravke";
+		return "redirect:/worker/getPopravke";
 	}
 
 }

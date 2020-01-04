@@ -126,7 +126,7 @@
 									<td>U bazi</td>
 									<td>nisu evidentirane</td>
 									<td>ni jedne</td>
-									<td>popravke :(</td>
+									<td>popravke</td>
 								</tr>
 							
 							</tbody>
