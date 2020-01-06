@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,12 +19,14 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.autoservis.projekat.repository.PopravkaRepository;
+import com.autoservis.projekat.repository.UslugaRepository;
 import com.autoservis.projekat.repository.VoziloRepository;
 import com.autoservis.projekat.session.Session;
 
 import model.Popravka;
 import model.Radnik;
 import model.Status;
+import model.Usluga;
 
 @Controller
 public class PopravkaController {
@@ -35,6 +39,9 @@ public class PopravkaController {
 
 	@Autowired
 	VoziloRepository vr;
+	
+	@Autowired
+	UslugaRepository ur;
 
 	@GetMapping("/admin/getPopravke")
 	public String getPopravke() {
@@ -53,7 +60,9 @@ public class PopravkaController {
 		var r = (Radnik) request.getSession().getAttribute("radnik");
 
 		var lista = pr.getPopravkeZaRadnika(r.getKorIme());
-
+		var popravke = pr.getPopravkeZaRadnikaStatus("Završena", r.getKorIme());
+		
+		request.getSession().setAttribute("mojeGotovePopravke", popravke);
 		request.getSession().setAttribute("mojePopravke", lista);
 
 		return "popravke";
@@ -173,38 +182,105 @@ public class PopravkaController {
 		return "redirect:/admin/refreshData";
 	}
 
-	@PostMapping("/worker/changePopravkaPridru")
-	public String changePopravkaPridruzivanje(Integer popravka) {
-
-		try {
-
-			var popravka2 = pr.findById(popravka).get();
-			var status = new Status();
-			status.setIdStatus(5);
-
-			popravka2.setStatus(status);
-
-			pr.save(popravka2);
-
-			request.getSession().setAttribute("uspesnoPridruzivanje", true);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			request.getSession().setAttribute("greskaPopravka", true);
-			return "greske";
-		}
-
-		return "editPopravke";
-	}
-
 	@GetMapping("/worker/getPopravke")
 	public String getPopravkeWorker() {
 
-		var popravke = pr.getPopravkaByStatus("U procesu");
+		var popravke = pr.getPopravkeZaRadnikaStatus("U procesu", Session.getRadnik().getKorIme());
 
 		request.getSession().setAttribute("popravke", popravke);
 
 		return "redirect:/worker/editPopravkePage";
+	}
+	
+	@PostMapping("/worker/updatePopravka")
+	public String updatePopravka(Integer popravka, Date datum) {
+		
+		try {
+			
+			String[] selektovano = request.getParameterValues("usluge");	
+			Integer[] parsirano = parsiraj(selektovano);
+			
+			if(parsirano == null) {
+				request.getSession().setAttribute("greskaPopravka", true);
+				return "greske";
+			}
+			
+			var usluge = vratiUsluge(parsirano);
+			var p = pr.findById(popravka).get();
+			
+			Date pocetak = p.getDatumPrijema();
+
+			if (datum.before(pocetak)) {
+				request.getSession().setAttribute("greskaPopravka", true);
+				return "greske";
+			}
+			
+			p.setDatumZavrsetka(datum);
+			p.setUslugas(usluge);
+			
+			var status = new Status();
+			status.setIdStatus(3);
+			
+			p.setStatus(status);
+			
+			var cena = usluge.stream()
+					         .collect(Collectors.summingDouble(Usluga::getCena));
+			
+			p.setCena(cena);
+			
+			pr.save(p);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			request.getSession().setAttribute("greskaPopravka", true);
+			return "greske";
+		}
+		
+		return "redirect:/worker/refreshPopravke";
+	}
+	
+	@GetMapping("/worker/refreshPopravke")
+	public String refreshPopravke() {
+		
+		var popravke = pr.getPopravkeZaRadnikaStatus("Završena", Session.getRadnik().getKorIme());
+		
+		request.getSession().setAttribute("mojeGotovePopravke", popravke);
+		
+		return "popravke";
+	}
+	
+	private Integer[] parsiraj(String[] selektovano) {
+		
+		Integer[] parsirano = new Integer[selektovano.length];
+		var brojac = 0;
+		
+		for(var s: selektovano) {
+			
+			try {
+				
+				var broj = Integer.parseInt(s);
+				parsirano[brojac++] = broj;
+				
+			} catch(NumberFormatException nfe) {
+				return null;
+			}
+		}
+		
+		return parsirano;
+		
+	}
+	
+	private List<Usluga> vratiUsluge(Integer[] parsirano){
+		
+		List<Usluga> usluge = new ArrayList<>();
+		
+		for(var x: parsirano) {
+			
+			var u = ur.findById(x).get();
+			usluge.add(u);
+		}
+		
+		return usluge;
 	}
 
 }

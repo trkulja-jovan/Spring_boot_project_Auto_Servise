@@ -37,7 +37,7 @@
         		</li>
         		
         		<li class="nav-item">
-          			<a class="nav-link sidesthrd" href="${pageContext.request.contextPath}/worker/getVozila">
+          			<a class="nav-link sidesthrd" href="${pageContext.request.contextPath}/worker/getDataForPopravka">
             			<span class="textside">Popravke</span>
           			</a>
         		</li>

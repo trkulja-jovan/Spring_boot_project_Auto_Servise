@@ -134,6 +134,55 @@
 					</table>
 				</div>
 				
+				<div class="naslov">
+					<h3>Prikaz završenih popravki:</h3>
+				</div>
+			
+				<div class="tabela">
+			
+					<table class="redTable">
+						<thead>
+							<tr>
+								<th>Opis popravke</th>
+								<th>Datum prijema</th>
+								<th>Datum završetka</th>
+								<th>Status popravke</th>
+								<th>Cena popravke</th>
+							</tr>
+						</thead>
+					    <c:if test="${not empty mojeGotovePopravke}">
+							<tbody>
+						
+								<c:forEach var="p" items="${mojeGotovePopravke}">
+							
+									<tr>
+										<td>${p.opisPopravke}</td>
+										<td>${p.datumPrijema}</td>
+										<td>${p.datumZavrsetka}</td>
+										<td>${p.status.opis}</td>
+										<td>${p.cena}</td>
+									</tr>
+						
+								</c:forEach>
+							</tbody>
+						</c:if>
+						
+						<c:if test="${empty mojeGotovePopravke}">
+							<tbody>
+								
+								<tr>
+									<td>U bazi</td>
+									<td>nisu evidentirane</td>
+									<td>ni jedne</td>
+									<td>popravke</td>
+									<td>0</td>
+								</tr>
+							
+							</tbody>
+						</c:if>
+					</table>
+				</div>
+				
 			</div>
 	
 		</sec:authorize>

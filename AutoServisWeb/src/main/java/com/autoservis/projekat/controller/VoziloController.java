@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.autoservis.projekat.repository.KlijentRepository;
@@ -57,15 +56,4 @@ public class VoziloController {
 		}
 		
 	}
-	
-	@GetMapping("/worker/getVozila")
-	public String getDataPopravka() {
-		
-		var vozila = vr.findAll();
-
-		request.getSession().setAttribute("vozila", vozila);
-		
-		return "redirect:/worker/getPopravke";
-	}
-
 }

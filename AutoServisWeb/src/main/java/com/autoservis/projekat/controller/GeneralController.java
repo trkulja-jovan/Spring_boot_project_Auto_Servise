@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.autoservis.projekat.repository.KlijentRepository;
 import com.autoservis.projekat.repository.PopravkaRepository;
 import com.autoservis.projekat.repository.RadnikRepository;
+import com.autoservis.projekat.repository.UslugaRepository;
+import com.autoservis.projekat.repository.VoziloRepository;
 import com.autoservis.projekat.session.Session;
 
 @Controller
@@ -24,6 +26,12 @@ public class GeneralController {
 
 	@Autowired
 	KlijentRepository kr;
+	
+	@Autowired
+	VoziloRepository vr;
+	
+	@Autowired
+	UslugaRepository ur;
 
 	@Autowired
 	HttpServletRequest request;
@@ -39,9 +47,6 @@ public class GeneralController {
 			var mojePopravke = pr.getPopravkeZaRadnikaStatus("Čeka", r.getKorIme());
 			request.getSession().setAttribute("mojePopravkeCeka", mojePopravke);
 			
-			var popravkePridr = pr.getPopravkeZaRadnikaStatus("Pridruživanje", r.getKorIme());
-			request.getSession().setAttribute("pridruzivanje", popravkePridr);
-
 			var mojePopravkeOdobreno = pr.getPopravkeZaRadnikaStatus("Odobreno", r.getKorIme());
 			request.getSession().setAttribute("mojePopravkeOdobreno", mojePopravkeOdobreno);
 
@@ -53,9 +58,7 @@ public class GeneralController {
 			var rad = rr.count();
 
 			var popravkeCekanje = pr.getPopravkaByStatus("Čeka");
-			var popravkePridr = pr.getPopravkaByStatus("Pridruživanje");
-			
-			request.getSession().setAttribute("pridruzivanje", popravkePridr);
+
 			request.getSession().setAttribute("popravkeCekanje", popravkeCekanje);
 			request.getSession().setAttribute("brCekanjePop", l);
 			request.getSession().setAttribute("brPopravlja", l2);
@@ -78,9 +81,7 @@ public class GeneralController {
 		var rad = rr.count();
 
 		var popravkeCekanje = pr.getPopravkaByStatus("Čeka");
-		var popravkePridr = pr.getPopravkaByStatus("Pridruživanje");
-		
-		request.getSession().setAttribute("pridruzivanje", popravkePridr);
+
 		request.getSession().setAttribute("popravkeCekanje", popravkeCekanje);
 		request.getSession().setAttribute("brCekanjePop", l);
 		request.getSession().setAttribute("brPopravlja", l2);
@@ -96,11 +97,9 @@ public class GeneralController {
 
 		var mojePopravke = pr.getPopravkeZaRadnikaStatus("Čeka", korIme);
 		var popravkeRadi = pr.getPopravkeZaRadnikaStatus("U procesu", korIme);
-		var popravkePridr = pr.getPopravkeZaRadnikaStatus("Pridruživanje", korIme);
 		var mojePopravkeOdobreno = pr.getPopravkeZaRadnikaStatus("Odobreno", korIme);
-		request.getSession().setAttribute("mojePopravkeOdobreno", mojePopravkeOdobreno);
 		
-		request.getSession().setAttribute("pridruzivanje", popravkePridr);
+		request.getSession().setAttribute("mojePopravkeOdobreno", mojePopravkeOdobreno);
 		request.getSession().setAttribute("mojePopravkeCeka", mojePopravke);
 		request.getSession().setAttribute("mojePopravkeRadi", popravkeRadi);
 
@@ -115,6 +114,18 @@ public class GeneralController {
 		request.getSession().setAttribute("klijenti", klijenti);
 
 		return "klijenti";
+	}
+	
+	@GetMapping("/worker/getDataForPopravka")
+	public String dataForPopravka() {
+		
+		var vozila = vr.findAll();
+		var usluge = ur.findAll();
+
+		request.getSession().setAttribute("vozila", vozila);
+		request.getSession().setAttribute("usluge", usluge);
+		
+		return "redirect:/worker/getPopravke";
 	}
 
 }
