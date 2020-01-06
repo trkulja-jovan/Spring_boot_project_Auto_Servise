@@ -30,14 +30,14 @@ public class Radnik implements Serializable {
 
 	private String prezime;
 
+	//bi-directional many-to-many association to Popravka
+	@ManyToMany(mappedBy="radniks")
+	private List<Popravka> popravkas;
+
 	//bi-directional many-to-one association to Uloga
 	@ManyToOne
 	@JoinColumn(name="Uloga_idUloga")
 	private Uloga uloga;
-
-	//bi-directional many-to-many association to Popravka
-	@ManyToMany(mappedBy="radniks")
-	private List<Popravka> popravkas;
 
 	public Radnik() {
 	}
@@ -90,20 +90,20 @@ public class Radnik implements Serializable {
 		this.prezime = prezime;
 	}
 
-	public Uloga getUloga() {
-		return this.uloga;
-	}
-
-	public void setUloga(Uloga uloga) {
-		this.uloga = uloga;
-	}
-
 	public List<Popravka> getPopravkas() {
 		return this.popravkas;
 	}
 
 	public void setPopravkas(List<Popravka> popravkas) {
 		this.popravkas = popravkas;
+	}
+
+	public Uloga getUloga() {
+		return this.uloga;
+	}
+
+	public void setUloga(Uloga uloga) {
+		this.uloga = uloga;
 	}
 
 }

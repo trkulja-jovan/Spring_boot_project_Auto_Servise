@@ -30,11 +30,8 @@ public class Popravka implements Serializable {
 
 	@Column(name="opis_popravke")
 	private String opisPopravke;
-
-	//bi-directional many-to-one association to Status
-	@ManyToOne
-	@JoinColumn(name="Status_idStatus")
-	private Status status;
+	
+	private Double cena;
 
 	//bi-directional many-to-many association to Radnik
 	@ManyToMany
@@ -49,31 +46,10 @@ public class Popravka implements Serializable {
 		)
 	private List<Radnik> radniks;
 
-	//bi-directional many-to-many association to Vozilo
-	@ManyToMany
-	@JoinTable(
-		name="vozilo_has_popravka"
-		, joinColumns={
-			@JoinColumn(name="Popravka_idPopravka")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="Vozilo_idVozilo")
-			}
-		)
-	private List<Vozilo> vozilos;
-
-	//bi-directional many-to-many association to Sifarnik
-	@ManyToMany
-	@JoinTable(
-		name="sifarnik_has_popravka"
-		, joinColumns={
-			@JoinColumn(name="Popravka_idPopravka")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="Sifarnik_idKvar")
-			}
-		)
-	private List<Sifarnik> sifarniks;
+	//bi-directional many-to-one association to Status
+	@ManyToOne
+	@JoinColumn(name="Status_idStatus")
+	private Status status;
 
 	//bi-directional many-to-many association to Usluga
 	@ManyToMany
@@ -87,6 +63,19 @@ public class Popravka implements Serializable {
 			}
 		)
 	private List<Usluga> uslugas;
+
+	//bi-directional many-to-many association to Vozilo
+	@ManyToMany
+	@JoinTable(
+		name="vozilo_has_popravka"
+		, joinColumns={
+			@JoinColumn(name="Popravka_idPopravka")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="Vozilo_idVozilo")
+			}
+		)
+	private List<Vozilo> vozilos;
 
 	public Popravka() {
 	}
@@ -123,6 +112,14 @@ public class Popravka implements Serializable {
 		this.opisPopravke = opisPopravke;
 	}
 
+	public List<Radnik> getRadniks() {
+		return this.radniks;
+	}
+
+	public void setRadniks(List<Radnik> radniks) {
+		this.radniks = radniks;
+	}
+
 	public Status getStatus() {
 		return this.status;
 	}
@@ -131,12 +128,12 @@ public class Popravka implements Serializable {
 		this.status = status;
 	}
 
-	public List<Radnik> getRadniks() {
-		return this.radniks;
+	public List<Usluga> getUslugas() {
+		return this.uslugas;
 	}
 
-	public void setRadniks(List<Radnik> radniks) {
-		this.radniks = radniks;
+	public void setUslugas(List<Usluga> uslugas) {
+		this.uslugas = uslugas;
 	}
 
 	public List<Vozilo> getVozilos() {
@@ -146,21 +143,13 @@ public class Popravka implements Serializable {
 	public void setVozilos(List<Vozilo> vozilos) {
 		this.vozilos = vozilos;
 	}
-
-	public List<Sifarnik> getSifarniks() {
-		return this.sifarniks;
+	
+	public void setCena(Double cena) {
+		this.cena = cena;
 	}
-
-	public void setSifarniks(List<Sifarnik> sifarniks) {
-		this.sifarniks = sifarniks;
-	}
-
-	public List<Usluga> getUslugas() {
-		return this.uslugas;
-	}
-
-	public void setUslugas(List<Usluga> uslugas) {
-		this.uslugas = uslugas;
+	
+	public Double getCena() {
+		return cena;
 	}
 
 }
