@@ -1,5 +1,6 @@
 package com.autoservis.projekat.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,6 +22,13 @@ public interface PopravkaRepository extends JpaRepository<Popravka, Integer>{
 	
 	@Query("select p from Popravka p inner join p.radniks r where p.status.opis like :status and r.korIme like :korIme")
 	public List<Popravka> getPopravkeZaRadnikaStatus(@Param("status") String status, @Param("korIme") String korIme);
+	
+	@Query("select p from Popravka p where p.datumPrijema >= :datumOd and "
+										+ "p.datumZavrsetka <= :datumDo and "
+										+ "p.status.opis like :status")
+	public List<Popravka> getPopravkasBetweenDates(@Param("datumOd") Date datumOd, 
+												   @Param("datumDo") Date datumDo,
+												   @Param("status") String status);
 	
 
 }

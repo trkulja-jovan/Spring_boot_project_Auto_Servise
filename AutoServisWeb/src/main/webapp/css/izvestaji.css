@@ -1,0 +1,33 @@
+.content-wrapper {
+  min-height: calc(100vh - 56px);
+  padding-top: 4rem;
+  overflow-x: hidden;
+  background: transparent;
+}
+
+.naslov {
+	margin-left: 35%;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+.naslov h3{
+	
+	color:blue;
+	font-weight: bold;
+}
+
+.forma {
+	margin-top: 5%;
+}
+
+.form-register label {
+	color: black;
+	font-weight: bold;
+}
+
+.form-register input[type="submit"]{
+	background-color: #008CBA;
+	font-size: 17px;
+	color: white;
+}

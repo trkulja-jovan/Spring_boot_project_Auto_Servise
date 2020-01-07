@@ -55,7 +55,7 @@
         		</li>
         						
         		<li class="nav-item">
-          			<a class="nav-link sidesixth" href="">
+          			<a class="nav-link sidesixth" href="${pageContext.request.contextPath}/admin/getDataForIzvestaj">
             			<span class="textside">Izveštaji</span>
           			</a>
         		</li>

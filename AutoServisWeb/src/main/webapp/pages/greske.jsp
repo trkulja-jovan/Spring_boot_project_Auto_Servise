@@ -68,6 +68,16 @@
 				<c:remove var = "greskaPopravka"/>
 			</div>
 		</c:if>
+		
+		<c:if test="${greskaIzvestaj}">
+			<div class="error-main">
+				<h1>Oops!</h1>
+				<div class="error-heading">500</div>
+				<p>Greška prilikom generisanja izveštaja. <br></p>
+				<p><a href="/AutoServis/admin/refreshData">Povratak na početnu stranicu</a></p>
+				<c:remove var = "greskaIzvestaj"/>
+			</div>
+		</c:if>
 	
 	</sec:authorize>
 	
