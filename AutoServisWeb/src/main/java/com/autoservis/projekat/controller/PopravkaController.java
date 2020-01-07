@@ -27,6 +27,7 @@ import model.Popravka;
 import model.Radnik;
 import model.Status;
 import model.Usluga;
+import model.Vozilo;
 
 @Controller
 public class PopravkaController {
@@ -59,11 +60,14 @@ public class PopravkaController {
 
 		var r = (Radnik) request.getSession().getAttribute("radnik");
 
-		var lista = pr.getPopravkeZaRadnika(r.getKorIme());
+		var listaCeka = pr.getPopravkeZaRadnikaStatus("Čeka", r.getKorIme());
+		var listaRadi = pr.getPopravkeZaRadnikaStatus("U procesu", r.getKorIme());
 		var popravke = pr.getPopravkeZaRadnikaStatus("Završena", r.getKorIme());
 		
+		listaCeka.addAll(listaRadi);
+		
 		request.getSession().setAttribute("mojeGotovePopravke", popravke);
-		request.getSession().setAttribute("mojePopravke", lista);
+		request.getSession().setAttribute("mojePopravke", listaCeka);
 
 		return "popravke";
 
@@ -101,6 +105,9 @@ public class PopravkaController {
 			radnici.add(Session.getRadnik());
 
 			popravka.setRadniks(radnici);
+			
+			var vozila = new ArrayList<Vozilo>();
+			popravka.setVozilos(vozila);
 
 			pr.save(popravka);
 
@@ -135,26 +142,25 @@ public class PopravkaController {
 			var status = new Status();
 			status.setIdStatus(2);
 			
-			var radnik = Session.getRadnik();
-			if(popravka.getRadniks().contains(radnik)) {
-				
-				popravka.setStatus(status);
-				pr.save(popravka);
-				request.getSession().setAttribute("uspesnoZapoceto", true);
-				
-			} else {
-				
-				popravka.getRadniks().add(radnik);
-				pr.save(popravka);
-				request.getSession().setAttribute("uspesnoZapoceto", true);
-			}
+			popravka.setStatus(status);
+			pr.save(popravka);
+			request.getSession().setAttribute("uspesnoZapoceto", true);
 
 		} catch (Exception e) {
 			request.getSession().setAttribute("greskaPopravka", true);
 			return "greske";
 		}
 
-		return "redirect:/worker/getMojePopravke";
+		return "redirect:/worker/getPopravkaPage";
+	}
+	
+	@GetMapping("/worker/getPopravkaPage")
+	public String popravkaPage() {
+		
+		var listaRadi = pr.getPopravkeZaRadnikaStatus("U procesu", Session.getRadnik().getKorIme());
+		request.getSession().setAttribute("mojePopravke", listaRadi);
+		
+		return "popravke";
 	}
 
 	@PostMapping("/admin/changePopravkaData")
@@ -236,17 +242,7 @@ public class PopravkaController {
 			return "greske";
 		}
 		
-		return "redirect:/worker/refreshPopravke";
-	}
-	
-	@GetMapping("/worker/refreshPopravke")
-	public String refreshPopravke() {
-		
-		var popravke = pr.getPopravkeZaRadnikaStatus("Završena", Session.getRadnik().getKorIme());
-		
-		request.getSession().setAttribute("mojeGotovePopravke", popravke);
-		
-		return "popravke";
+		return "redirect:/worker/getMojePopravke";
 	}
 	
 	private Integer[] parsiraj(String[] selektovano) {

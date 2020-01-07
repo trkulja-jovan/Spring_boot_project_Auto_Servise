@@ -111,7 +111,7 @@
 									<tr>
 										<td>${p.opisPopravke}</td>
 										<td>${p.datumPrijema}</td>
-										<td>${p.datumZavrsetka}</td>
+										<td>---</td>
 										<td>${p.status.opis}</td>
 									</tr>
 						
@@ -135,7 +135,7 @@
 				</div>
 				
 				<div class="naslov">
-					<h3>Prikaz završenih popravki:</h3>
+					<h3>Prikaz završenih popravki</h3>
 				</div>
 			
 				<div class="tabela">
