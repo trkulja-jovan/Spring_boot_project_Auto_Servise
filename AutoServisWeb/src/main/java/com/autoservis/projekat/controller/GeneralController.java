@@ -49,7 +49,7 @@ public class GeneralController {
 			
 			var mojePopravkeOdobreno = pr.getPopravkeZaRadnikaStatus("Odobreno", r.getKorIme());
 			request.getSession().setAttribute("mojePopravkeOdobreno", mojePopravkeOdobreno);
-
+			
 		} else {
 
 			var l = pr.getPopravkaBroj("Čeka");

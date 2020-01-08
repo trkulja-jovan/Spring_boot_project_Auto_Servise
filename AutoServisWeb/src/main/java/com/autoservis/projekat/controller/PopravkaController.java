@@ -63,8 +63,11 @@ public class PopravkaController {
 		var listaCeka = pr.getPopravkeZaRadnikaStatus("Čeka", r.getKorIme());
 		var listaRadi = pr.getPopravkeZaRadnikaStatus("U procesu", r.getKorIme());
 		var popravke = pr.getPopravkeZaRadnikaStatus("Završena", r.getKorIme());
+		var mojePopravkePridruz = pr.getPopravkeZaRadnikaStatus("Pridruživanje", r.getKorIme());
+		request.getSession().setAttribute("mojePopravkePridruz", mojePopravkePridruz);
 		
 		listaCeka.addAll(listaRadi);
+		listaCeka.addAll(mojePopravkePridruz);
 		
 		request.getSession().setAttribute("mojeGotovePopravke", popravke);
 		request.getSession().setAttribute("mojePopravke", listaCeka);
@@ -192,8 +195,10 @@ public class PopravkaController {
 	public String getPopravkeWorker() {
 
 		var popravke = pr.getPopravkeZaRadnikaStatus("U procesu", Session.getRadnik().getKorIme());
+		var svePopravke = pr.getPopravkeZaPridruzivanje("U procesu", Session.getRadnik().getIdRadnik());
 
 		request.getSession().setAttribute("popravke", popravke);
+		request.getSession().setAttribute("popravkeZaPridr", svePopravke);
 
 		return "redirect:/worker/editPopravkePage";
 	}

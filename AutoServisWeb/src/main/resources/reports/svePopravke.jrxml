@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="radnikIzvestaj" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d1167b43-e9e2-4b6e-be3f-4d1608405e72">
-	<parameter name="radnik" class="java.lang.String"/>
-	<parameter name="datumOd" class="java.lang.String"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="svePopravke" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8c0b13e0-e26e-4566-9b29-907eebb1a6ca">
 	<parameter name="datumDo" class="java.lang.String"/>
+	<parameter name="datumOd" class="java.lang.String"/>
 	<parameter name="profit" class="java.lang.Double"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="cena" class="java.lang.Double"/>
-	<field name="datumZavrsetka" class="java.util.Date"/>
-	<field name="datumPrijema" class="java.util.Date"/>
 	<field name="opisPopravke" class="java.lang.String"/>
+	<field name="datumPrijema" class="java.util.Date"/>
+	<field name="datumZavrsetka" class="java.util.Date"/>
+	<field name="cena" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="99" splitType="Stretch">
+		<band height="92" splitType="Stretch">
 			<image>
-				<reportElement x="0" y="0" width="80" height="79" uuid="e5130aba-b5a2-4371-8caa-6f724877a46b"/>
+				<reportElement x="0" y="0" width="80" height="79" uuid="38d0e774-2818-40a2-8df4-ecb92d1b480a"/>
 				<imageExpression><![CDATA["/home/jovan/Desktop/EclipseWorkspace/RISProjekat/AutoServisWeb/src/main/resources/reports/app-icon.png"]]></imageExpression>
 			</image>
-			<image>
-				<reportElement x="497" y="0" width="45" height="79" uuid="cf7f9765-5df0-43b5-9968-44de4d32f7af"/>
-				<imageExpression><![CDATA["/home/jovan/Downloads/Grb-Srbije-165x300.png"]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement positionType="Float" x="80" y="0" width="400" height="39" forecolor="#FF0400" uuid="20addc20-2c19-4c98-a650-737e8265ce96"/>
+				<reportElement positionType="Float" x="80" y="0" width="400" height="39" forecolor="#FF0400" uuid="3e974d3d-18d0-40ec-b92b-f7263f5d9fe4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="20" isBold="true"/>
 				</textElement>
@@ -34,83 +29,67 @@
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="80" y="50" width="400" height="30" forecolor="#0008FF" uuid="87aaa011-9133-476e-a3e2-c66a64acdb1c"/>
+				<reportElement x="80" y="50" width="400" height="30" forecolor="#0008FF" uuid="af10d182-4b2c-430f-989c-e4165894e299"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Auto servis "RIS", Bulevar Kralja Aleksandra 2, Novi Sad
 ]]></text>
 			</staticText>
+			<image>
+				<reportElement x="497" y="0" width="45" height="79" uuid="3744b885-5b33-4db9-9002-9b57b593e0b9"/>
+				<imageExpression><![CDATA["/home/jovan/Downloads/Grb-Srbije-165x300.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="217" splitType="Stretch">
+		<band height="250" splitType="Stretch">
 			<staticText>
-				<reportElement x="81" y="0" width="400" height="60" forecolor="#1A8008" uuid="216982f4-40c0-49fe-9797-2b0d33173d4a"/>
+				<reportElement x="80" y="0" width="400" height="60" forecolor="#1A8008" uuid="5a88a855-7ca1-4085-9941-ede13d059690"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Monospaced" size="16" isBold="true" isItalic="false" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[IZVEŠTAJ
-- popravke majstora za određen period -]]></text>
+- sve popravke u periodu -]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="" mode="Opaque" x="80" y="90" width="100" height="30" forecolor="#FFFFFF" backcolor="#0015FF" uuid="799b3b96-fc95-4c5a-bc28-025df7ed3bcf"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-					<font fontName="Monospaced" size="13" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Majstor:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement key="" mode="Opaque" x="80" y="122" width="100" height="30" forecolor="#FFFFFF" backcolor="#0015FF" uuid="844560ab-34ef-40a1-9603-79725a8b8cb4"/>
+				<reportElement key="" mode="Opaque" x="80" y="120" width="100" height="30" forecolor="#FFFFFF" backcolor="#0015FF" uuid="23024129-5c1c-48fd-a65f-af1e27af5e23"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Monospaced" size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Od:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="" mode="Opaque" x="80" y="154" width="100" height="30" forecolor="#FFFFFF" backcolor="#0015FF" uuid="f283f95b-03f2-441c-b643-eb79ca025cdb"/>
+				<reportElement key="" mode="Opaque" x="80" y="160" width="100" height="30" forecolor="#FFFFFF" backcolor="#0015FF" uuid="1fd21c3c-ef42-4bbe-8b50-d0ac178dbbaf"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Monospaced" size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Do:]]></text>
 			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="350" y="100" width="123" height="52" forecolor="#000000" backcolor="#000000" uuid="996a4090-fa5b-47a5-9e5f-461bc216bd94"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-					<font fontName="Monospaced" isBold="true"/>
-				</textElement>
-				<text><![CDATA[OSTVAREN PROFIT U DATOM PERIODU ]]></text>
-			</staticText>
 			<textField>
-				<reportElement mode="Opaque" x="183" y="90" width="147" height="30" forecolor="#FFFFFF" backcolor="#990500" uuid="a83541eb-35d9-424c-b16c-054c99511f0c"/>
+				<reportElement mode="Opaque" x="190" y="120" width="100" height="30" forecolor="#FFFFFF" backcolor="#990500" uuid="6e62d779-f079-4829-9e75-c30d119fd9d3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="13"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{radnik}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement mode="Opaque" x="183" y="122" width="147" height="30" forecolor="#FFFFFF" backcolor="#990500" uuid="fb829604-9fca-4e31-9bc7-ec95d8c2d0c3"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="13"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{datumOd}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="183" y="154" width="147" height="30" forecolor="#FFFFFF" backcolor="#990500" uuid="349b9cf4-2522-421f-b90c-2621bbf3c1a7"/>
+				<reportElement mode="Opaque" x="190" y="160" width="100" height="30" forecolor="#FFFFFF" backcolor="#990500" uuid="14931f5f-8fd9-42a5-a04b-396ab6aaf4d5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="13"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{datumDo}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="361" y="151" width="100" height="30" forecolor="#B53600" uuid="0f24807b-f008-4d8a-ac77-b2447d8cf885"/>
+			<staticText>
+				<reportElement mode="Opaque" x="80" y="210" width="210" height="30" forecolor="#FFFFFF" backcolor="#000000" uuid="c9c475f1-0f74-4b05-9590-f10dfa2ea630"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Monospaced" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OSTVAREN PROFIT U DATOM PERIODU ]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="290" y="210" width="110" height="30" forecolor="#FFFFFF" backcolor="#000000" uuid="0309f139-68cd-49ae-ac5c-05c27b49753d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Monospaced" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{profit}]]></textFieldExpression>
@@ -118,9 +97,9 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="34" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="80" y="0" width="130" height="30" forecolor="#FFFFFF" backcolor="#C76A00" uuid="793c2667-92b6-4ac9-b5c3-8ece9f11d708"/>
+				<reportElement mode="Opaque" x="80" y="15" width="130" height="30" forecolor="#FFFFFF" backcolor="#C76A00" uuid="17cf4e28-0c28-40bd-a54a-48b6ead37c99"/>
 				<box>
 					<pen lineStyle="Dashed" lineColor="#000000"/>
 					<topPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
@@ -134,7 +113,7 @@
 				<text><![CDATA[Opis popravke]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="210" y="0" width="100" height="30" forecolor="#000000" backcolor="#FFC336" uuid="9a4034c8-1ac0-440c-b510-1291ec40ed00"/>
+				<reportElement mode="Opaque" x="210" y="15" width="100" height="30" forecolor="#000000" backcolor="#FFC336" uuid="4fbeee88-8c10-4fea-a674-3d41de5f1f9f"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Dashed"/>
 					<topPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
@@ -148,7 +127,7 @@
 				<text><![CDATA[Početak]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="310" y="0" width="100" height="30" forecolor="#FFFFFF" backcolor="#C76A00" uuid="7238184a-9542-4644-b607-085a753e671a"/>
+				<reportElement mode="Opaque" x="310" y="15" width="100" height="30" forecolor="#FFFFFF" backcolor="#C76A00" uuid="f947b4f3-e325-4177-80a5-cccd8caa1786"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
 					<topPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
@@ -162,7 +141,7 @@
 				<text><![CDATA[Kraj]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="410" y="0" width="70" height="30" forecolor="#000000" backcolor="#FFC336" uuid="7a667fc8-ac25-43fb-b243-500a7efc6dab"/>
+				<reportElement mode="Opaque" x="410" y="15" width="70" height="30" forecolor="#000000" backcolor="#FFC336" uuid="210cda15-1dbc-436f-aecb-702bdaab83a9"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Dashed"/>
 					<topPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
@@ -178,29 +157,27 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="230" splitType="Stretch">
+		<band height="233" splitType="Stretch">
 			<textField>
-				<reportElement mode="Opaque" x="80" y="0" width="130" height="30" forecolor="#FFFFFF" backcolor="#C76A00" uuid="8cbe0bae-1eb4-4857-a7c5-d5a5724b68ff">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d43c6a41-6fe9-4fe4-8416-201013387b0e"/>
+				<reportElement mode="Opaque" x="80" y="0" width="130" height="30" forecolor="#FFFFFF" backcolor="#C76A00" uuid="b45c4a68-271b-4bf5-a8ca-ac4dbe189253">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0ca0047f-00d7-4cc3-942c-08ea286a9f9c"/>
 				</reportElement>
 				<box>
-					<pen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+					<pen lineStyle="Dashed" lineColor="#000000"/>
 					<topPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
 					<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Monospaced"/>
-				</textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{opisPopravke}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="210" y="0" width="100" height="30" backcolor="#FFC336" uuid="f66fba32-9318-41fe-beea-066e9d7477c7">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a6da8675-a9a7-4a4b-8c3b-3a01db3f6558"/>
+				<reportElement mode="Opaque" x="210" y="0" width="100" height="30" backcolor="#FFC336" uuid="230ec4be-3add-4ee8-aa75-77b658348d8f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="64a104d4-5ecb-4f9d-a231-750463b60468"/>
 				</reportElement>
 				<box>
-					<pen lineStyle="Dashed"/>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
 					<topPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
@@ -212,8 +189,8 @@
 				<textFieldExpression><![CDATA[$F{datumPrijema}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="310" y="0" width="100" height="30" forecolor="#FFFFFF" backcolor="#C76A00" uuid="baae250e-6abb-4728-96a7-3221a74ac8ed">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ea735707-3a7b-4d84-9933-014005bf9760"/>
+				<reportElement mode="Opaque" x="310" y="0" width="100" height="30" forecolor="#FFFFFF" backcolor="#C76A00" uuid="33d32a08-d4e5-4a13-ae45-8fef936489ee">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="84598b41-5139-4471-8aca-0ff8b1f78d07"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
@@ -228,15 +205,15 @@
 				<textFieldExpression><![CDATA[$F{datumZavrsetka}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="410" y="0" width="70" height="30" backcolor="#FFC336" uuid="e460ca1a-a725-421e-a577-ee0e6367704d">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="76c217a4-0f9c-46fb-a8f4-80ed35e38db3"/>
+				<reportElement mode="Opaque" x="410" y="0" width="70" height="30" backcolor="#FFC336" uuid="aa3ff9e5-0438-4b56-8ee3-f7905eea8875">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b73cb3ba-2058-4c0f-a234-14a72093a5c7"/>
 				</reportElement>
 				<box>
-					<pen lineStyle="Dashed"/>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
 					<topPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
-					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Monospaced"/>
@@ -246,12 +223,12 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band splitType="Stretch"/>
+		<band height="55" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="39" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<textField>
-				<reportElement x="230" y="9" width="100" height="30" uuid="64fde20e-7e98-409f-97da-0a4a3bf90540"/>
+				<reportElement x="230" y="12" width="100" height="30" uuid="2e1090e7-7db2-463d-b336-9da78354bf3f"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -259,14 +236,14 @@
 	<summary>
 		<band height="72" splitType="Stretch">
 			<staticText>
-				<reportElement x="384" y="10" width="150" height="30" uuid="5b8d6acd-2995-4965-9c6f-9fba68383cbe"/>
+				<reportElement x="384" y="10" width="150" height="30" uuid="80adda5f-23d4-4add-b2a0-2dc1ecc54f59"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Monospaced" size="14"/>
 				</textElement>
 				<text><![CDATA[Odgovorno lice]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="364" y="42" width="191" height="30" uuid="b2cac5be-c009-4dcb-8f8c-267e38ceeb78"/>
+				<reportElement x="364" y="42" width="191" height="30" uuid="db684069-42db-4b1f-989b-2d2f09f86c8c"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font isBold="true"/>
 				</textElement>

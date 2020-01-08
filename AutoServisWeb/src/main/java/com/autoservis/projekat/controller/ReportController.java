@@ -1,5 +1,6 @@
 package com.autoservis.projekat.controller;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,6 +26,7 @@ import com.autoservis.projekat.repository.RadnikRepository;
 
 import model.Popravka;
 import model.Radnik;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -51,7 +53,10 @@ public class ReportController {
 	@GetMapping("/getDataForIzvestaj")
 	public String getData() {
 		
-		var radnici = rr.findAll();
+		var radnici = rr.findAll()
+				        .stream()
+				        .filter(r -> r.getUloga().getNazivUloge().equals("WORKER"))
+				        .collect(Collectors.toList());
 		
 		request.getSession().setAttribute("radnici", radnici);
 		
@@ -71,14 +76,12 @@ public class ReportController {
 				return;
 			}
 			
-			var popravke = pr.getPopravkasBetweenDates(datumOd, datumDo, "Završena");
+			var popravke = pr.getPopravkasBetweenDates(datumOd, datumDo, "Završena", r.getIdRadnik());
 			if(popravke == null || popravke.size() == 0) {
 				nemaPopravki();
 				return;
 			}
-			
-			popravke.forEach(System.out::println);
-			
+
 			var ukupnaCena = 0.0;
 			
 			ukupnaCena = popravke.stream() 
@@ -101,7 +104,7 @@ public class ReportController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
 	}
 	
-	private void generisiIzvestaj(Radnik r, List<Popravka> popravke, Double ukupnaCena) throws Exception {
+	private String generisiIzvestaj(Radnik r, List<Popravka> popravke, Double ukupnaCena) throws Exception {
 		
 		response.setContentType("text/html");
 		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(popravke);
@@ -122,11 +125,11 @@ public class ReportController {
 		inputStream.close();
 		
 		response.setContentType("application/x-download");
-		response.addHeader("Content-disposition", "attachment; filename=PopravkeMajstora.pdf");
+		response.addHeader("Content-disposition", "attachment; filename=PopravkeMajstora"+r.getIme()+".pdf");
 		ServletOutputStream out = response.getOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint,out);
 		
-		request.getSession().invalidate();
+		return "reports";
 	}
 	
 	private String greska() {
@@ -137,6 +140,68 @@ public class ReportController {
 	private String nemaPopravki() {
 		request.getSession().setAttribute("nemaPopravki", true);
 		return "reports";
+	}
+	
+	@GetMapping("/svePopravkeIzvestaj")
+	public void svePopravke(Date datumOd, Date datumDo) {
+		
+		try {
+			
+			if(datumOd.after(datumDo)) {
+				greska();
+				return;
+			}
+			
+			var popravke = pr.getPopravkasBetweenDates(datumOd, datumDo, "Završena");
+			if(popravke == null || popravke.size() == 0) {
+				nemaPopravki();
+				return;
+			}
+
+			var ukupnaCena = 0.0;
+			
+			ukupnaCena = popravke.stream() 
+					             .collect(Collectors.summingDouble(Popravka::getCena));
+			
+			generisiIzvestajSvePopravke(popravke, ukupnaCena);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			greska();
+			return;
+		}
+	}
+	
+	private String generisiIzvestajSvePopravke(List<Popravka> popravke, Double ukupnaCena) {
+		
+		try {
+			response.setContentType("text/html");
+			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(popravke);
+			InputStream inputStream = this.getClass().getResourceAsStream("/reports/svePopravke.jrxml");
+			JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
+			Map<String, Object> params = new HashMap<String, Object>();
+
+			String datumOd = popravke.get(0).getDatumPrijema().toString();
+			String datumDo = popravke.get(0).getDatumZavrsetka().toString();
+			
+			params.put("datumOd", datumOd);
+			params.put("datumDo", datumDo);
+			params.put("profit", ukupnaCena);
+			
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
+			inputStream.close();
+			
+			response.setContentType("application/x-download");
+			response.addHeader("Content-disposition", "attachment; filename=Sve_Popravke.pdf");
+			ServletOutputStream out = response.getOutputStream();
+			JasperExportManager.exportReportToPdfStream(jasperPrint,out);
+			
+		} catch(JRException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "reports";
+		
 	}
 
 }

@@ -158,7 +158,7 @@
 					</form>
 						
 				</div>
-
+				
 				<div class="ispisi">
 					
 					<c:if test="${uspesnoPopravka}">

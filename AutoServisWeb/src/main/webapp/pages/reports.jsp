@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
@@ -83,10 +84,54 @@
 						</table>
 					
 					</form>
+					
+					<form action="${pageContext.request.contextPath}/admin/svePopravkeIzvestaj" 
+					      method="get" 
+					      class="form-register">
+						
+						<table>
+							
+							<tr>
+								<td>
+									<label>Izaberite datum za izveštaj</label>
+								</td>
+								
+								<td>
+									<input type="date" name="datumOd" required>	
+								</td>
+								
+								<td>
+									<input type="date" name="datumDo" required>	
+								</td>
+								
+								<td>
+									<input type="submit" value="Odštampaj izveštaj">
+								</td>
+								
+								<td>
+									<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" /> 
+								</td>
+								
+							</tr>
+							
+							<tr>
+								<c:if test="${nemaPopravki}">
+									<td>
+										Za izabrani period ne postoje popravke
+									</td>
+									<c:remove var="nemaPopravki"/>
+								</c:if>
+							</tr>
+
+						</table>
+					
+					</form>
 						
 				</div>
 			
 			</div>
+			
 	</sec:authorize>
 	
 	<sec:authorize access="!isAuthenticated()">
