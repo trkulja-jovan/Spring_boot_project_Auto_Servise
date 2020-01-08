@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.transaction.Transactional;
+
 import java.util.List;
 
 
@@ -67,7 +69,8 @@ public class Vozilo implements Serializable {
 	public void setVlasnik(Vlasnik vlasnik) {
 		this.vlasnik = vlasnik;
 	}
-
+	
+	@Transactional
 	public List<Popravka> getPopravkas() {
 		return this.popravkas;
 	}

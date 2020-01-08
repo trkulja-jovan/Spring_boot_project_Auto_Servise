@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.transaction.Transactional;
+
 import java.util.List;
 
 
@@ -43,7 +45,8 @@ public class Status implements Serializable {
 	public void setOpis(String opis) {
 		this.opis = opis;
 	}
-
+	
+	@Transactional
 	public List<Popravka> getPopravkas() {
 		return this.popravkas;
 	}

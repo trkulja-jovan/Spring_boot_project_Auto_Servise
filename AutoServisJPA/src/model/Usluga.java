@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.transaction.Transactional;
+
 import java.util.List;
 
 
@@ -54,7 +56,8 @@ public class Usluga implements Serializable {
 	public void setNazivUsluge(String nazivUsluge) {
 		this.nazivUsluge = nazivUsluge;
 	}
-
+	
+	@Transactional
 	public List<Popravka> getPopravkas() {
 		return this.popravkas;
 	}

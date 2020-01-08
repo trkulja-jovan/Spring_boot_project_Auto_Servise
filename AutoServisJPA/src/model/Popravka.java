@@ -1,9 +1,23 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.transaction.Transactional;
 
 
 /**
@@ -111,7 +125,8 @@ public class Popravka implements Serializable {
 	public void setOpisPopravke(String opisPopravke) {
 		this.opisPopravke = opisPopravke;
 	}
-
+	
+	@Transactional
 	public List<Radnik> getRadniks() {
 		return this.radniks;
 	}
@@ -127,7 +142,8 @@ public class Popravka implements Serializable {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-
+	
+	@Transactional
 	public List<Usluga> getUslugas() {
 		return this.uslugas;
 	}
@@ -135,7 +151,8 @@ public class Popravka implements Serializable {
 	public void setUslugas(List<Usluga> uslugas) {
 		this.uslugas = uslugas;
 	}
-
+	
+	@Transactional
 	public List<Vozilo> getVozilos() {
 		return this.vozilos;
 	}

@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.transaction.Transactional;
+
 import java.util.List;
 
 
@@ -45,6 +47,7 @@ public class Uloga implements Serializable {
 		this.nazivUloge = nazivUloge;
 	}
 
+	@Transactional
 	public List<Radnik> getRadniks() {
 		return this.radniks;
 	}
