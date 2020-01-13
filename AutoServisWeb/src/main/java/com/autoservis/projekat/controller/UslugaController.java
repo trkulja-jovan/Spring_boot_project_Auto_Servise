@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -62,6 +63,21 @@ public class UslugaController {
 		request.getSession().setAttribute("usluge", usluge);
 		
 		return "usluge";
+	}
+	
+	@GetMapping("/admin/getUslugeForDetalji")
+	public String getUslugas(Model model) {
+		
+		Integer id = (Integer) request.getSession().getAttribute("id");
+		
+		var usluge = ur.getUsluge(id);
+		
+		if(usluge != null)
+			request.getSession().setAttribute("usluge", usluge);
+		
+		request.getSession().removeAttribute("id");
+		
+		return "detalji";
 	}
 
 }

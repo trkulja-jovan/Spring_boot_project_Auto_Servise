@@ -65,5 +65,17 @@ public class KlijentController {
 			return "greske";
 		}
 	}
+	
+	@GetMapping("/admin/detaljiKlijentForPopravka")
+	public String detaljiForPopravka() {
+		
+		Integer id = (Integer) request.getSession().getAttribute("id");
+		var vozila = vr.getVozilas(id);
+		
+		if(vozila != null)
+			request.getSession().setAttribute("vozila", vozila);
+		
+		return "redirect:/admin/getRadniks";
+	}
 
 }

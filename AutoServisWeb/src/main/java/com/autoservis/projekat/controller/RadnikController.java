@@ -77,4 +77,18 @@ public class RadnikController {
 		
 		return "redirect:/admin/radnikPage";
 	}
+	
+	@GetMapping("/admin/getRadniks")
+	public String getRadniks() {
+		
+		Integer id = (Integer) request.getSession().getAttribute("id");
+		
+		var radniciNaPopravci = rr.getRadniks(id);
+		
+		if(radniciNaPopravci != null)
+			request.getSession().setAttribute("radnici", radniciNaPopravci);
+		
+		return "redirect:/admin/getUslugeForDetalji";
+		
+	}
 }

@@ -15,5 +15,8 @@ public interface RadnikRepository extends JpaRepository<Radnik, Integer> {
 	
 	@Query("select r from Radnik r where r.uloga.nazivUloge like :uloga")
 	public List<Radnik> findByRole(@Param("uloga") String uloga);
+	
+	@Query("select r from Radnik r inner join r.popravkas p where p.idPopravka = :id")
+	public List<Radnik> getRadniks(@Param("id") Integer id);
 
 }

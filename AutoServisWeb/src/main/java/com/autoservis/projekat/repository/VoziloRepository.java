@@ -15,5 +15,8 @@ public interface VoziloRepository extends JpaRepository<Vozilo, Integer>{
 	
 	@Query("select v from Vozilo v where v.regTablice like :regTab")
 	public Vozilo findByRegTablice(@Param("regTab") String regTab);
+	
+	@Query("select v from Vozilo v inner join v.popravkas p where p.idPopravka = :id")
+	public List<Vozilo> getVozilas(@Param("id") Integer id);
 
 }

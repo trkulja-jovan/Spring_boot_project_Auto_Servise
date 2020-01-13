@@ -63,11 +63,8 @@ public class PopravkaController {
 		var listaCeka = pr.getPopravkeZaRadnikaStatus("Čeka", r.getKorIme());
 		var listaRadi = pr.getPopravkeZaRadnikaStatus("U procesu", r.getKorIme());
 		var popravke = pr.getPopravkeZaRadnikaStatus("Završena", r.getKorIme());
-		var mojePopravkePridruz = pr.getPopravkeZaRadnikaStatus("Pridruživanje", r.getKorIme());
-		request.getSession().setAttribute("mojePopravkePridruz", mojePopravkePridruz);
 		
 		listaCeka.addAll(listaRadi);
-		listaCeka.addAll(mojePopravkePridruz);
 		
 		request.getSession().setAttribute("mojeGotovePopravke", popravke);
 		request.getSession().setAttribute("mojePopravke", listaCeka);
@@ -78,8 +75,13 @@ public class PopravkaController {
 
 	@GetMapping("/admin/detaljiPopravke")
 	public String detalji(Integer id) {
+		
+		var popravka = pr.findById(id).get();
+		
+		request.getSession().setAttribute("popravka", popravka);
+		request.getSession().setAttribute("id", id);
 
-		return "detalji";
+		return "redirect:/admin/detaljiKlijentForPopravka";
 	}
 
 	@PostMapping("/worker/addPopravka")
@@ -110,6 +112,8 @@ public class PopravkaController {
 			popravka.setRadniks(radnici);
 			
 			var vozila = new ArrayList<Vozilo>();
+			vozila.add(vr.findById(vozilo).get());
+			
 			popravka.setVozilos(vozila);
 
 			pr.save(popravka);
@@ -273,7 +277,7 @@ public class PopravkaController {
 	
 	private List<Usluga> vratiUsluge(Integer[] parsirano){
 		
-		List<Usluga> usluge = new ArrayList<>();
+		var usluge = new ArrayList<Usluga>();
 		
 		for(var x: parsirano) {
 			
