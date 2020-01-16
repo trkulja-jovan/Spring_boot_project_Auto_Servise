@@ -13,6 +13,7 @@
 
 	<link rel="stylesheet" type="text/css" href="/AutoServis/css/detalji.css" />
 	<link rel="shortcut icon" type="image/png" href="/AutoServis/images/app-icon.png" />
+	
 	<meta charset="UTF-8">
 	<title>Detalji</title>
 </head>

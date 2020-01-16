@@ -198,6 +198,14 @@ a:hover {
   margin-right: 30px;
 }
 
+.fontstyyy h2{
+  color: #6E6E6E;
+  font-size: 35px;
+  margin-top: 15px;
+  text-align: center;
+  margin-right: 30px;
+}
+
 .content-wrapper {
   min-height: calc(100vh - 56px);
   padding-top: 4rem;
