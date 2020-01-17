@@ -127,6 +127,32 @@
 						</table>
 					
 					</form>
+					
+					<form action="${pageContext.request.contextPath}/admin/sveUslugeIzvestaj" 
+					      method="get" 
+					      class="form-register">
+						
+						<table>
+							
+							<tr>
+								<td>
+									<label>Izveštaj svih usluga</label>
+								</td>
+								
+								<td>
+									<input type="submit" value="Odštampaj izveštaj">
+								</td>
+								
+								<td>
+									<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" /> 
+								</td>
+								
+							</tr>
+							
+						</table>
+					
+					</form>
 						
 				</div>
 			

@@ -23,10 +23,12 @@ function showFormPopravka(){
 	
 	var formaPopravka = document.getElementById("formPopravka");
 	var formaEdit = document.getElementById("formEdit");
+	var formPridr = document.getElementById("formPridr");
 	
 	if(formaPopravka.style.display === "none"){
 		formaPopravka.style.display = "block";
 		formaEdit.style.display = "none";
+		formPridr.style.display = "none";
 	}
 }
 
@@ -34,11 +36,27 @@ function showFormEdit(){
 	
 	var formaPopravka = document.getElementById("formPopravka");
 	var formaEdit = document.getElementById("formEdit");
+	var formPridr = document.getElementById("formPridr");
 	
 	if(formaEdit.style.display === "none"){
 		formaEdit.style.display = "block";
 		formaPopravka.style.display = "none";
+		formPridr.style.display = "none";
 	}
+}
+
+function showFormPridr() {
+	
+	var formaPopravka = document.getElementById("formPopravka");
+	var formaEdit = document.getElementById("formEdit");
+	var formPridr = document.getElementById("formPridr");
+	
+	if(formPridr.style.display === "none"){
+		formPridr.style.display = "block";
+		formaPopravka.style.display = "none";
+		formaEdit.style.display = "none";
+	}
+	
 }
 
 function showFormVozilo(){

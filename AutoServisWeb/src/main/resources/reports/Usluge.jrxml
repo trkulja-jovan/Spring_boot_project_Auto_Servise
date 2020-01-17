@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Usluge" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ae13847f-baea-408e-8fcc-20a73ad2227a">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nazivUsluge" class="java.lang.String"/>
+	<field name="cena" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="201" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="80" height="79" uuid="5f4e535f-ddde-4c2c-be84-f9b182eb73a8"/>
+				<imageExpression><![CDATA["/home/jovan/Desktop/EclipseWorkspace/RISProjekat/AutoServisWeb/src/main/resources/reports/app-icon.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement positionType="Float" x="80" y="0" width="400" height="39" forecolor="#FF0400" uuid="7bf9f29b-8243-4d5f-8529-282ac8289291"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Republika Srbija
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="50" width="400" height="30" forecolor="#0008FF" uuid="13298406-5160-498e-9f64-ee6804bc6744"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Auto servis "RIS", Bulevar Kralja Aleksandra 2, Novi Sad
+]]></text>
+			</staticText>
+			<image>
+				<reportElement x="497" y="0" width="45" height="79" uuid="34a25b7e-d550-49ef-b9f3-16be1765a4d1"/>
+				<imageExpression><![CDATA["/home/jovan/Downloads/Grb-Srbije-165x300.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="80" y="111" width="400" height="60" forecolor="#1A8008" uuid="a33ac154-a9b6-4230-acff-beab610c5ee2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Monospaced" size="16" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[IZVEŠTAJ
+- sve usluge -]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="10" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="150" y="0" width="130" height="30" forecolor="#FFFFFF" backcolor="#C76A00" uuid="c1c79489-28c8-46ab-8d22-3fb6ebfc8fc0"/>
+				<box>
+					<pen lineStyle="Dashed" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="13"/>
+				</textElement>
+				<text><![CDATA[Naziv usluge]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="280" y="0" width="130" height="30" forecolor="#000000" backcolor="#FFC336" uuid="586d25f7-bcf8-43e7-a206-b6cff7fdd5ab"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="13"/>
+				</textElement>
+				<text><![CDATA[Cena usluge]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="150" y="0" width="130" height="30" forecolor="#FFFFFF" backcolor="#C76A00" uuid="e6dfc5cd-0cbf-4027-9c43-5204f8ef4d22">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c74cff03-afae-4b12-955f-210e8cc13654"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Dashed"/>
+					<topPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nazivUsluge}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="280" y="0" width="130" height="30" backcolor="#FFC336" uuid="47e04556-2b8a-4394-b107-3c4d89ac005e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ed61e6b3-a568-405b-9f39-1ab574a1d118"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cena}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="227" y="10" width="100" height="30" uuid="7235c6fd-dc5a-4d8a-a92a-ad5ca4a3c662"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="72" splitType="Stretch">
+			<staticText>
+				<reportElement x="384" y="10" width="150" height="30" uuid="3b1ec844-83d8-405d-bd76-0a3cd3656377"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="14"/>
+				</textElement>
+				<text><![CDATA[Odgovorno lice]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="364" y="42" width="191" height="30" uuid="6369840d-1dcc-4346-a032-ba133ab6f1d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[______________________________]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

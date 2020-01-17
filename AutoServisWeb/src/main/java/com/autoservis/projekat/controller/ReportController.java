@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.autoservis.projekat.repository.PopravkaRepository;
 import com.autoservis.projekat.repository.RadnikRepository;
+import com.autoservis.projekat.repository.UslugaRepository;
 
 import model.Popravka;
 import model.Radnik;
@@ -49,6 +50,9 @@ public class ReportController {
 	
 	@Autowired
 	PopravkaRepository pr;
+	
+	@Autowired
+	UslugaRepository ur;
 	
 	@GetMapping("/getDataForIzvestaj")
 	public String getData() {
@@ -169,6 +173,29 @@ public class ReportController {
 			e.printStackTrace();
 			greska();
 			return;
+		}
+	}
+	
+	@GetMapping("/sveUslugeIzvestaj")
+	public void izvestajZaUsluge() {
+
+		try {
+			response.setContentType("text/html");
+			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(ur.findAll());
+			InputStream inputStream = this.getClass().getResourceAsStream("/reports/Usluge.jrxml");
+			JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
+			Map<String, Object> params = new HashMap<String, Object>();
+			
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
+			inputStream.close();
+			
+			response.setContentType("application/x-download");
+			response.addHeader("Content-disposition", "attachment; filename=Usluge.pdf");
+			ServletOutputStream out = response.getOutputStream();
+			JasperExportManager.exportReportToPdfStream(jasperPrint,out);
+			
+		} catch(JRException | IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
