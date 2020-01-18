@@ -32,27 +32,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	    http.authorizeRequests()
-	    .antMatchers("/").permitAll()
-	    .antMatchers("/admin/**").hasRole("ADMIN")
-	    .antMatchers("/worker/**").hasAnyRole("ADMIN","WORKER")
-        .and()
-        .formLogin()
-        .loginPage("/pages/login.jsp")
-        .loginProcessingUrl("/login")
-        .defaultSuccessUrl("/getAll")
-        .failureForwardUrl("/pages/failure.jsp")
-        .and()
-        .logout()
-        .invalidateHttpSession(true)
-        .logoutSuccessUrl("/pages/login.jsp")
-        .and()
-        .exceptionHandling()
-        .accessDeniedPage("/pages/access_denied.jsp")
-        .and().rememberMe().and()
-        .csrf();
+		
+		http.authorizeRequests(authorize -> {
+	    	authorize.antMatchers("/").permitAll();
+	    	authorize.antMatchers("/admin/**").hasRole("ADMIN");
+	    	authorize.antMatchers("/worker/**").hasAnyRole("ADMIN","WORKER");
+	    });
+        
+        http.formLogin(login -> {
+        	
+        	login.loginPage("/pages/login.jsp");
+        	login.loginProcessingUrl("/login");
+        	login.defaultSuccessUrl("/getAll");
+        	login.failureForwardUrl("/pages/failure.jsp");
+        });
+        
+        http.logout(logout -> {
+        	logout.invalidateHttpSession(true);
+            logout.logoutSuccessUrl("/pages/login.jsp");
+        });
+        
+        http.exceptionHandling(exception -> {
+        	exception.accessDeniedPage("/pages/access_denied.jsp");
+        });
+        
+        http.rememberMe();
+        http.csrf();
 	}
-
 	
-
 }

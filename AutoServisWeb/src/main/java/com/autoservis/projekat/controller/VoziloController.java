@@ -44,7 +44,7 @@ public class VoziloController {
 			v.setRegTablice(regTab);
 			v.setVlasnik(vlasnik);
 			
-			vr.save(v);
+			vr.saveAndFlush(v);
 			
 			request.getSession().setAttribute("uspesnoVozilo", true);
 			

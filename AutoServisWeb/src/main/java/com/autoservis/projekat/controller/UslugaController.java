@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -47,7 +46,7 @@ public class UslugaController {
 		u.setCena(parsCena);
 		u.setNazivUsluge(nazUsluge);
 		
-		ur.save(u);
+		ur.saveAndFlush(u);
 		
 		request.getSession().setAttribute("uspesnoUsluga", true);
 		
@@ -66,9 +65,9 @@ public class UslugaController {
 	}
 	
 	@GetMapping("/admin/getUslugeForDetalji")
-	public String getUslugas(Model model) {
+	public String getUslugas() {
 		
-		Integer id = (Integer) request.getSession().getAttribute("id");
+		var id = (Integer) request.getSession().getAttribute("id");
 		
 		var usluge = ur.getUsluge(id);
 		

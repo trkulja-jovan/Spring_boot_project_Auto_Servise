@@ -24,7 +24,7 @@ public class UserDetailImpl implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
-		 Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();      
+		 var authorities = new ArrayList<SimpleGrantedAuthority>();      
 		 
 		 authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getNazivUloge()));
 		 

@@ -81,7 +81,7 @@ public class RadnikController {
 	@GetMapping("/admin/getRadniks")
 	public String getRadniks() {
 		
-		Integer id = (Integer) request.getSession().getAttribute("id");
+		var id = (Integer) request.getSession().getAttribute("id");
 		
 		var radniciNaPopravci = rr.getRadniks(id);
 		

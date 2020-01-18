@@ -135,7 +135,7 @@ public class PopravkaController {
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		var sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sdf.setLenient(true);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
 	}
@@ -146,11 +146,14 @@ public class PopravkaController {
 		try {
 
 			var popravka = pr.findById(idPopravka).get();
-			var status = new Status();
-			status.setIdStatus(2);
 			
+			var status = new Status();
+			
+			status.setIdStatus(2);
 			popravka.setStatus(status);
+			
 			pr.save(popravka);
+			
 			request.getSession().setAttribute("uspesnoZapoceto", true);
 
 		} catch (Exception e) {
@@ -178,8 +181,8 @@ public class PopravkaController {
 			var popravka = pr.findById(idPopravka).get();
 
 			var status = new Status();
+			
 			status.setIdStatus(4);
-
 			popravka.setStatus(status);
 
 			pr.save(popravka);
@@ -234,8 +237,8 @@ public class PopravkaController {
 			p.setUslugas(usluge);
 			
 			var status = new Status();
-			status.setIdStatus(3);
 			
+			status.setIdStatus(3);
 			p.setStatus(status);
 			
 			var cena = usluge.stream()
@@ -256,7 +259,7 @@ public class PopravkaController {
 	
 	private Integer[] parsiraj(String[] selektovano) {
 		
-		Integer[] parsirano = new Integer[selektovano.length];
+		var parsirano = new Integer[selektovano.length];
 		var brojac = 0;
 		
 		for(var s: selektovano) {
