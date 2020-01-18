@@ -77,8 +77,9 @@
 						</c:if>
 					</table>
 				</div>
-			
+
 			</div>
+				
 	
 		</sec:authorize>
 	

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.autoservis.projekat.repository.PopravkaRepository;
+import com.autoservis.projekat.repository.RadnikRepository;
 import com.autoservis.projekat.repository.UslugaRepository;
 import com.autoservis.projekat.repository.VoziloRepository;
 import com.autoservis.projekat.session.Session;
@@ -43,6 +44,9 @@ public class PopravkaController {
 	
 	@Autowired
 	UslugaRepository ur;
+	
+	@Autowired
+	RadnikRepository rr;
 
 	@GetMapping("/admin/getPopravke")
 	public String getPopravke() {
@@ -50,7 +54,7 @@ public class PopravkaController {
 		var popravke = pr.findAll();
 
 		request.getSession().setAttribute("svePopravke", popravke);
-
+		
 		return "popravke";
 
 	}
@@ -89,9 +93,9 @@ public class PopravkaController {
 
 		try {
 
-			Date tren = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+			var trenDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-			if (datum.before(tren)) {
+			if (datum.before(trenDate)) {
 				request.getSession().setAttribute("greskaPopravka", true);
 				return "greske";
 			}
@@ -215,8 +219,8 @@ public class PopravkaController {
 		
 		try {
 			
-			String[] selektovano = request.getParameterValues("usluge");	
-			Integer[] parsirano = parsiraj(selektovano);
+			var selektovano = request.getParameterValues("usluge");	
+			var parsirano = parsiraj(selektovano);
 			
 			if(parsirano == null) {
 				request.getSession().setAttribute("greskaPopravka", true);
@@ -226,7 +230,7 @@ public class PopravkaController {
 			var usluge = vratiUsluge(parsirano);
 			var p = pr.findById(popravka).get();
 			
-			Date pocetak = p.getDatumPrijema();
+			var pocetak = p.getDatumPrijema();
 
 			if (datum.before(pocetak)) {
 				request.getSession().setAttribute("greskaPopravka", true);

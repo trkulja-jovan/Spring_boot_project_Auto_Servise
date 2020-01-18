@@ -56,7 +56,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         	exception.accessDeniedPage("/pages/access_denied.jsp");
         });
         
-        http.rememberMe();
         http.csrf();
 	}
 	

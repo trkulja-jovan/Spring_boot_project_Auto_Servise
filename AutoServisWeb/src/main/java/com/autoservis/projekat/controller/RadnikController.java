@@ -91,4 +91,5 @@ public class RadnikController {
 		return "redirect:/admin/getUslugeForDetalji";
 		
 	}
+
 }

@@ -93,7 +93,7 @@ public class GeneralController {
 	@GetMapping("/worker/refreshData")
 	public String getRefreshDataWorker() {
 
-		String korIme = Session.getRadnik().getKorIme();
+		var korIme = Session.getRadnik().getKorIme();
 
 		var mojePopravke = pr.getPopravkeZaRadnikaStatus("Čeka", korIme);
 		var popravkeRadi = pr.getPopravkeZaRadnikaStatus("U procesu", korIme);
