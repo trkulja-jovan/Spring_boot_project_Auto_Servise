@@ -1,11 +1,12 @@
 package com.autoservis.projekat.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,13 +19,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.autoservis.projekat.repository.KlijentRepository;
 import com.autoservis.projekat.repository.PopravkaRepository;
 import com.autoservis.projekat.repository.RadnikRepository;
 import com.autoservis.projekat.repository.UslugaRepository;
 
 import model.Popravka;
 import model.Radnik;
-
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -46,9 +47,14 @@ public class ReportController {
 	
 	@Autowired
 	PopravkaRepository pr;
-	
+
 	@Autowired
 	UslugaRepository ur;
+	
+	@Autowired
+	KlijentRepository kr;
+	
+	private OutputStream out = null;
 	
 	@GetMapping("/getDataForIzvestaj")
 	public String getData() {
@@ -105,8 +111,10 @@ public class ReportController {
 	
 	private void generisiIzvestaj(Radnik r, List<Popravka> popravke, Double ukupnaCena) throws Exception {
 		
-		try (var out = response.getOutputStream(); 
-			 var inputStream = this.getClass().getResourceAsStream("/reports/radnikIzvestaj.jrxml")) {
+		if(out == null)
+			out = response.getOutputStream();
+		
+		try (var inputStream = this.getClass().getResourceAsStream("/reports/radnikIzvestaj.jrxml")) {
 			
 			response.setContentType("text/html");
 			
@@ -178,9 +186,15 @@ public class ReportController {
 	
 	@GetMapping("/sveUslugeIzvestaj")
 	public void izvestajZaUsluge() {
+		
+		if(out == null)
+			try {
+				out = response.getOutputStream();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
 
-		try (var out = response.getOutputStream(); 
-			 var inputStream = this.getClass().getResourceAsStream("/reports/Usluge.jrxml")) {
+		try (var inputStream = this.getClass().getResourceAsStream("/reports/Usluge.jrxml")) {
 			
 			response.setContentType("text/html");
 			
@@ -204,8 +218,14 @@ public class ReportController {
 	
 	private void generisiIzvestajSvePopravke(List<Popravka> popravke, Double ukupnaCena) {
 		
-		try (var out = response.getOutputStream();
-			 var inputStream = this.getClass().getResourceAsStream("/reports/svePopravke.jrxml")) {
+		if(out == null)
+			try {
+				out = response.getOutputStream();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+		
+		try (var inputStream = this.getClass().getResourceAsStream("/reports/svePopravke.jrxml")) {
 			
 			response.setContentType("text/html");
 			
@@ -233,6 +253,41 @@ public class ReportController {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@GetMapping("/sviKlijentiIzvestaj")
+	public void generisiIzvestajSvihKlijenata() {
+		
+		var sviKlijenti = kr.findAll();
+		
+		if(out == null)
+			try {
+				out = response.getOutputStream();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+		
+		try (var inputStream = this.getClass().getResourceAsStream("/reports/Klijenti.jrxml")) {
+				
+				response.setContentType("text/html");
+				
+				var dataSource = new JRBeanCollectionDataSource(sviKlijenti);
+				
+				var jasperReport = JasperCompileManager.compileReport(inputStream);
+				
+//				NE DOZVOLJAVA MI BEZ PARAMETARA
+				var params = new HashMap<String, Object>();
+
+				var jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
+				
+				response.setContentType("application/x-download");
+				response.addHeader("Content-disposition", "attachment; filename=Svi_Klijenti.pdf");
+				
+				JasperExportManager.exportReportToPdfStream(jasperPrint,out);
+				
+			} catch(JRException | IOException e) {
+				e.printStackTrace();
+			}
 	}
 
 }

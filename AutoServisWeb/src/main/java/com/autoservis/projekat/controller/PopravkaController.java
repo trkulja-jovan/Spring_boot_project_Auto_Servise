@@ -99,10 +99,10 @@ public class PopravkaController {
 				request.getSession().setAttribute("greskaPopravka", true);
 				return "greske";
 			}
-
+			
 			var popravka = new Popravka();
 			popravka.setDatumPrijema(datum);
-			popravka.setDatumZavrsetka(datum);
+//			popravka.setDatumZavrsetka(datum);
 			popravka.setOpisPopravke(opis);
 
 			var status = new Status();
@@ -293,42 +293,6 @@ public class PopravkaController {
 		}
 		
 		return usluge;
-	}
-	
-	@PostMapping("/worker/addVoziloToPopravka")
-	public String addVoziloToPopravka(String popravka, String vozilo) {
-		
-		try {
-			
-			var radnik = Session.getRadnik();
-			
-			var p = pr.findById(Integer.parseInt(popravka)).get();
-			var v = vr.findById(Integer.parseInt(vozilo)).get();
-			
-			var vozilos = p.getVozilos();
-			vozilos.add(v);
-			p.setVozilos(vozilos);
-			
-			var popravkeZaRadnika = pr.getPopravkeZaRadnikaStatus("U procesu", radnik.getKorIme());
-			
-			if(!popravkeZaRadnika.contains(p)) {
-				var radniks = p.getRadniks();
-				radniks.add(radnik);
-				p.setRadniks(radniks);
-			}
-				
-			pr.saveAndFlush(p);
-			
-			request.getSession().setAttribute("uspesnoPopravka2", true);
-			
-			return "editPopravke";
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-			request.getSession().setAttribute("greskaPopravka", true);
-			return "greske";
-		}
-		
 	}
 
 }

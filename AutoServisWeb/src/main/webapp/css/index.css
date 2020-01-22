@@ -24,6 +24,11 @@ body {
 .ispisi h4{
 	text-decoration: underline;
 	color: black;
+	margin-left: 5%;
+}
+
+#workerTable {
+	margin-left: 5%;
 }
 
 .ispisi .uspeloh3{

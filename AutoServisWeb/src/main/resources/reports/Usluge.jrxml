@@ -10,7 +10,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="201" splitType="Stretch">
+		<band height="193" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="80" height="79" uuid="5f4e535f-ddde-4c2c-be84-f9b182eb73a8"/>
 				<imageExpression><![CDATA["/home/jovan/Desktop/EclipseWorkspace/RISProjekat/AutoServisWeb/src/main/resources/reports/app-icon.png"]]></imageExpression>
@@ -46,7 +46,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="10" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band height="47" splitType="Stretch">
@@ -81,7 +81,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="31" splitType="Stretch">
 			<textField>
 				<reportElement mode="Opaque" x="150" y="0" width="130" height="30" forecolor="#FFFFFF" backcolor="#C76A00" uuid="e6dfc5cd-0cbf-4027-9c43-5204f8ef4d22">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c74cff03-afae-4b12-955f-210e8cc13654"/>

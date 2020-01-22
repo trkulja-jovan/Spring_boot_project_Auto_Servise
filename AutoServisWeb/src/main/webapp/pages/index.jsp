@@ -153,18 +153,6 @@
     			<pre><br><br></pre>
     		</c:if>
     		
-    		<c:if test="${not empty mojePopravkePridruz}">
-    			
-    			<h3>Moje popravke u statusu čekanja za pridruživanje:</h3>
-    			<c:forEach var="p" items="${mojePopravkePridruz}">
-    				
-    				<h4>${p.opisPopravke} | ${p.datumPrijema} | ${p.status.opis}</h4>
-    			
-    			</c:forEach>
-    			
-    			<pre><br><br></pre>
-    		</c:if>
-    		
     		<c:if test="${empty mojePopravkeCeka}">
   				<h3 class="uspeloh3">Nemate popravki na čekanju za odobrenje</h3>
   				<pre><br><br></pre>
@@ -177,7 +165,7 @@
     			<form action="${pageContext.request.contextPath}/worker/changePopravkaData" method="post"
     				  class="form-register">
     			
-    				<table>
+    				<table id="workerTable">
     					
     					<c:forEach var="p" items="${mojePopravkeOdobreno}">
   								<tr>

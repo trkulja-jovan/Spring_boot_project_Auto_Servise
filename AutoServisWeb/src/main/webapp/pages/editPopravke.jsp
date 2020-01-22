@@ -36,7 +36,6 @@
 					
 					<button onclick="showFormPopravka()" class="dugme">Unesi popravku</button>
 					<button onclick="showFormEdit()" class="dugme">Izmeni popravku</button>
-					<button onclick="showFormPridr()" class="dugme">Pridruži vozilo popravci</button>
 				
 				</div>
 				
@@ -160,69 +159,6 @@
 						
 				</div>
 				
-				<div class="forma" id="formPridr" style="display: none">
-					
-					<form action="${pageContext.request.contextPath}/worker/addVoziloToPopravka" 
-					      method="post" 
-					      class="form-register">
-						
-						<table>
-							
-							<tr>
-								<td><label>Izaberite popravku</label></td>
-								<td>
-									<c:if test="${not empty popravkeZaPridr}">
-									
-										<select name="popravka">
-											<c:forEach var="p" items="${popravkeZaPridr}">
-												<option value="${p.idPopravka}">${p.opisPopravke} | ${p.datumPrijema}
-											</c:forEach>
-										</select>
-
-									</c:if>
-								</td>
-							</tr>
-							
-							<tr>
-								<c:if test="${not empty vozila}">
-									<td><label>Izaberite vozilo za popravku</label></td>
-									<td>
-										<select name="vozilo">
-											<c:forEach var="v" items="${vozila}">
-												<option value="${v.idVozilo}">${v.marka} | ${v.vlasnik.ime} ${v.vlasnik.prezime}
-											</c:forEach>
-										</select>
-									</td>
-								</c:if>
-								
-								<c:if test="${empty vozila}">
-									<td>
-										<label>
-											Nemate uneta vozila u bazi.
-											<a href="/AutoServis/getKlijenti">Unesi klijenta i / ili vozilo</a>
-										</label>
-									</td>
-								</c:if>
-							</tr>
-
-							<tr>
-								<td><pre><br><br></pre></td>
-								<td><input type="submit" value="Pridruži vozilo popravci"></td>
-							</tr>
-							
-							<tr>
-								<td>
-									<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" /> 
-								</td>
-							</tr>
-						
-						</table>
-					
-					</form>
-						
-				</div>
-				
 				<div class="ispisi">
 					
 					<c:if test="${uspesnoPopravka}">
@@ -236,23 +172,6 @@
 						</script>
 						
 						<h3 class="uspeloh3">Uspešno ste dodali popravku. Čeka se odobrenje šefa.</h3>
-						<pre><br></pre>
-						<c:remove var = "uspesnoPopravka"/>
-					</c:if>
-					
-					<c:if test="${uspesnoPopravka2}">
-						<pre><br></pre>
-						
-						<script type="text/javascript">
-							var forma = document.getElementById("formPridr");
-							if(forma.style.display === "block"){
-								forma.style.display = "none";
-							}
-						</script>
-						
-						<h3 class="uspeloh3">Uspešno ste dodali vozilo na popravku. <br> 
-											 Vi ste takođe dodati kao radnik na izabranu popravku. <br>
-											 Srećan rad :) </h3>
 						<pre><br></pre>
 						<c:remove var = "uspesnoPopravka"/>
 					</c:if>

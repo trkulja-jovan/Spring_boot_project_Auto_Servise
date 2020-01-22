@@ -22,7 +22,7 @@
 
 			<form action="${pageContext.request.contextPath}/login" method="post" class="form-signin">
 	
-				<h1 class="form-signin-heading text-muted">Prijava na sistem</h1>
+				<h1 class="form-signin-heading text-muted">Auto servis <b style="color: yellow">"RIS"</b></h1>
 			    
 				<input type="text" name="username" 
 				       class="form-control" 

@@ -69,7 +69,7 @@ public class KlijentController {
 	@GetMapping("/admin/detaljiKlijentForPopravka")
 	public String detaljiForPopravka() {
 		
-		Integer id = (Integer) request.getSession().getAttribute("id");
+		var id = (Integer) request.getSession().getAttribute("id");
 		var vozila = vr.getVozilas(id);
 		
 		if(vozila != null)
