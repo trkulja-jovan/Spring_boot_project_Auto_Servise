@@ -77,6 +77,40 @@
 						</c:if>
 					</table>
 				</div>
+				
+				<div class="naslov">
+					<h3>Prikaz podataka za radnika</h3>
+				</div>
+			
+				<div class="tabela">
+			
+					<table class="redTable">
+						<thead>
+							<tr>
+								<th>Ime i prezime radnika</th>
+								<th>Broj popravki na čekanju</th>
+								<th>Broj popravki u procesu</th>
+								<th>Broj završenih popravki</th>
+							</tr>
+						</thead>
+					    <c:if test="${not empty data}">
+							<tbody>
+						
+								<c:forEach var="d" items="${data}">
+							
+									<tr>
+										<td>${d.ime} ${d.prezime}</td>
+										<td>${d.ceka}</td>
+										<td>${d.u_procesu}</td>
+										<td>${d.zavrsene}</td>
+									</tr>
+						
+								</c:forEach>
+							</tbody>
+						</c:if>
+						
+					</table>
+				</div>
 
 			</div>
 				

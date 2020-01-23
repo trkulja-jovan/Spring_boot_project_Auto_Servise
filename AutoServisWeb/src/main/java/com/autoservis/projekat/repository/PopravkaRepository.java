@@ -17,6 +17,10 @@ public interface PopravkaRepository extends JpaRepository<Popravka, Integer>{
 	@Query("select count(*) from Popravka p where p.status.opis like :status")
 	public Long getPopravkaBroj(@Param("status") String param);
 	
+	@Query("select count(*) from Popravka p inner join p.radniks r where p.status.opis like :status and "
+																	  + "r.idRadnik = :id")
+	public Integer getBrojPopravkiZaRadnikaByStatus(@Param("id") Integer id, @Param("status") String status);
+	
 	@Query("select p from Popravka p inner join p.radniks r where r.korIme like :korIme")
 	public List<Popravka> getPopravkeZaRadnika(@Param("korIme") String korIme);
 	

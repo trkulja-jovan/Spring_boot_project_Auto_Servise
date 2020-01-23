@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +24,7 @@ import com.autoservis.projekat.repository.PopravkaRepository;
 import com.autoservis.projekat.repository.RadnikRepository;
 import com.autoservis.projekat.repository.UslugaRepository;
 import com.autoservis.projekat.repository.VoziloRepository;
+import com.autoservis.projekat.session.Data;
 import com.autoservis.projekat.session.Session;
 
 import model.Popravka;
@@ -53,8 +55,32 @@ public class PopravkaController {
 	public String getPopravke() {
 
 		var popravke = pr.findAll();
-
+		var radnici = rr.findAll();
+		
+		var dataRadnik = radnici.stream()
+								.filter(r -> r.getUloga().getNazivUloge().equals("WORKER"))
+								.sorted(Comparator.comparing(Radnik::getIdRadnik))
+						   		.map(r -> {
+			
+						   			Integer brZavr = pr.getBrojPopravkiZaRadnikaByStatus(r.getIdRadnik(), "Završena");
+						   			Integer brProc = pr.getBrojPopravkiZaRadnikaByStatus(r.getIdRadnik(), "U procesu");
+						   			Integer ceka = pr.getBrojPopravkiZaRadnikaByStatus(r.getIdRadnik(), "Čeka");
+			
+						   			Data d = new Data();
+						   			
+						   			d.setIme(r.getIme());
+						   			d.setPrezime(r.getPrezime());
+						   			d.setCeka(ceka);
+						   			d.setU_procesu(brProc);
+						   			d.setZavrsene(brZavr);
+			
+						   			return d;
+			
+						   		})
+						   		.collect(Collectors.toList());
+				                          		 
 		request.getSession().setAttribute("svePopravke", popravke);
+		request.getSession().setAttribute("data", dataRadnik);
 		
 		return "popravke";
 
