@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -220,14 +221,14 @@ public class PopravkaController {
 		try {
 			
 			var selektovano = request.getParameterValues("usluge");	
-			var parsirano = parsiraj(selektovano);
 			
-			if(parsirano == null) {
+			if(selektovano == null) {
 				request.getSession().setAttribute("greskaPopravka", true);
 				return "greske";
 			}
 			
-			var usluge = vratiUsluge(parsirano);
+			var usluge = vratiUsluge(selektovano);
+			
 			var p = pr.findById(popravka).get();
 			
 			var pocetak = p.getDatumPrijema();
@@ -261,36 +262,12 @@ public class PopravkaController {
 		return "redirect:/worker/getMojePopravke";
 	}
 	
-	private Integer[] parsiraj(String[] selektovano) {
+	private List<Usluga> vratiUsluge(String[] selektovano){
 		
-		var parsirano = new Integer[selektovano.length];
-		var brojac = 0;
-		
-		for(var s: selektovano) {
-			
-			try {
-				
-				var broj = Integer.parseInt(s);
-				parsirano[brojac++] = broj;
-				
-			} catch(NumberFormatException nfe) {
-				return null;
-			}
-		}
-		
-		return parsirano;
-		
-	}
-	
-	private List<Usluga> vratiUsluge(Integer[] parsirano){
-		
-		var usluge = new ArrayList<Usluga>();
-		
-		for(var x: parsirano) {
-			
-			var u = ur.findById(x).get();
-			usluge.add(u);
-		}
+		var usluge = Arrays.stream(selektovano)
+						   .map(Integer::parseInt)
+				           .map(u -> ur.findById(u).get())
+				           .collect(Collectors.toList());
 		
 		return usluge;
 	}

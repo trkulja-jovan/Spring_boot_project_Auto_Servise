@@ -34,7 +34,7 @@ public class VoziloController {
 				request.getSession().setAttribute("greskaVozilo", true);
 				return "greske";
 			}
-			
+		
 			vozilo = null;
 			
 			var vlasnik = kr.findById(klijent).get();

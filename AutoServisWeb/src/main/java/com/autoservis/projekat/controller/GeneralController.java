@@ -127,5 +127,27 @@ public class GeneralController {
 		
 		return "redirect:/worker/getPopravke";
 	}
+	
+	/*private void primer() {
+		
+		var svi_radnici = rr.findAll();
+		
+		//za svakog radnika u gore listi treba da pronadjem broj popravki zavrsenih, u toku i na cekanju
+		//primer za jednog radnika
+		
+		var statusProcesZaRadnika = pr.getPopravkeZaRadnikaStatus("U procesu", //ovde ide kor_ime radnika
+																			 // za koga se trazi lista popravki za prosledjeni
+																			 // status npr za trenutnog:
+																			Session.getRadnik().getKorIme());
+		var popravkeByStatusCeka = pr.getPopravkeZaRadnikaStatus("Čeka", Session.getRadnik().getKorIme());
+		
+		var popravkeByStatusZavrseno = pr.getPopravkeZaRadnikaStatus("Završeno", Session.getRadnik().getKorIme());
+		
+		//lako cu dobiti broj npr statusProcesZaRadnika.size() ili count
+		
+		//to sve treba sad u hashMapu
+		var mapa = new HashMap<String, List<Integer>>();
+		
+	}*/
 
 }
