@@ -55,28 +55,22 @@ public class PopravkaController {
 	public String getPopravke() {
 
 		var popravke = pr.findAll();
-		var radnici = rr.findAll();
+		var radnici = rr.findByRole("WORKER");
 		
 		var dataRadnik = radnici.stream()
-								.filter(r -> r.getUloga().getNazivUloge().equals("WORKER"))
-								.sorted(Comparator.comparing(Radnik::getIdRadnik))
 						   		.map(r -> {
 			
-						   			Integer brZavr = pr.getBrojPopravkiZaRadnikaByStatus(r.getIdRadnik(), "Završena");
-						   			Integer brProc = pr.getBrojPopravkiZaRadnikaByStatus(r.getIdRadnik(), "U procesu");
-						   			Integer ceka = pr.getBrojPopravkiZaRadnikaByStatus(r.getIdRadnik(), "Čeka");
-			
-						   			Data d = new Data();
+						   			var brZavr = pr.getBrojPopravkiZaRadnikaByStatus(r.getIdRadnik(), "Završena");
+						   			var brProc = pr.getBrojPopravkiZaRadnikaByStatus(r.getIdRadnik(), "U procesu");
+						   			var ceka = pr.getBrojPopravkiZaRadnikaByStatus(r.getIdRadnik(), "Čeka");
+
+						   			var ime = r.getIme();
+						   			var prezime = r.getPrezime();
 						   			
-						   			d.setIme(r.getIme());
-						   			d.setPrezime(r.getPrezime());
-						   			d.setCeka(ceka);
-						   			d.setU_procesu(brProc);
-						   			d.setZavrsene(brZavr);
-			
-						   			return d;
+						   			return new Data(ime, prezime, brZavr, brProc, ceka);
 			
 						   		})
+						   		.sorted(Comparator.comparing(Data::getPrezime))
 						   		.collect(Collectors.toList());
 				                          		 
 		request.getSession().setAttribute("svePopravke", popravke);
@@ -129,7 +123,6 @@ public class PopravkaController {
 			
 			var popravka = new Popravka();
 			popravka.setDatumPrijema(datum);
-//			popravka.setDatumZavrsetka(datum);
 			popravka.setOpisPopravke(opis);
 
 			var status = new Status();
@@ -212,8 +205,8 @@ public class PopravkaController {
 			var popravka = pr.findById(idPopravka).get();
 
 			var status = new Status();
-			
 			status.setIdStatus(4);
+			
 			popravka.setStatus(status);
 
 			pr.save(popravka);
@@ -268,7 +261,6 @@ public class PopravkaController {
 			p.setUslugas(usluge);
 			
 			var status = new Status();
-			
 			status.setIdStatus(3);
 			p.setStatus(status);
 			
@@ -290,12 +282,10 @@ public class PopravkaController {
 	
 	private List<Usluga> vratiUsluge(String[] selektovano){
 		
-		var usluge = Arrays.stream(selektovano)
-						   .map(Integer::parseInt)
-				           .map(u -> ur.findById(u).get())
-				           .collect(Collectors.toList());
-		
-		return usluge;
+		return Arrays.stream(selektovano)
+				     .map(Integer::parseInt)
+				     .map(u -> ur.findById(u).get())
+				     .collect(Collectors.toList());
 	}
 
 }

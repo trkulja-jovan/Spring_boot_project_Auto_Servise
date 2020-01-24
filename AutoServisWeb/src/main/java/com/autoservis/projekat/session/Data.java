@@ -9,44 +9,32 @@ public class Data {
 	private Integer u_procesu = 0;
 	private Integer ceka = 0;
 	
+	public Data(String ime, String prezime, Integer zavrsene, Integer u_procesu, Integer ceka) {
+		this.ime = ime;
+		this.prezime = prezime;
+		this.zavrsene = zavrsene;
+		this.u_procesu = u_procesu;
+		this.ceka = ceka;
+	}
+	
 	public String getIme() {
 		return ime;
-	}
-
-	public void setIme(String ime) {
-		this.ime = ime;
 	}
 
 	public String getPrezime() {
 		return prezime;
 	}
 
-	public void setPrezime(String prezime) {
-		this.prezime = prezime;
-	}
-
 	public Integer getZavrsene() {
 		return zavrsene;
 	}
-	
-	public void setZavrsene(Integer zavrsene) {
-		this.zavrsene = zavrsene;
-	}
-	
+
 	public Integer getU_procesu() {
 		return u_procesu;
 	}
-	
-	public void setU_procesu(Integer u_procesu) {
-		this.u_procesu = u_procesu;
-	}
-	
+
 	public Integer getCeka() {
 		return ceka;
 	}
 	
-	public void setCeka(Integer ceka) {
-		this.ceka = ceka;
-	}
-
 }

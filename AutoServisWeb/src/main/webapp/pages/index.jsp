@@ -23,7 +23,7 @@
   	<%@include file="meniAdmin.jsp"%>
   	  <div class="content-wrapper">
   	  	<div class="logg">
-  	  		<pre>Dobrodošao: ${radnik.ime} ${radnik.prezime}</pre>
+  	  		<pre>Dobrodošao / la: ${radnik.ime} ${radnik.prezime}</pre>
     		<h3>Ulogovani ste kao: ADMINISTRATOR</h3>
     		
     		<form action="${pageContext.request.contextPath}/logout" method="post">
@@ -130,7 +130,7 @@
   	<%@include file="meniRadnik.jsp"%>
   	<div class="content-wrapper">
   	  	<div class="logg">
-  	  		<pre>Dobrodošao: ${radnik.ime} ${radnik.prezime}</pre>
+  	  		<pre>Dobrodošao / la: ${radnik.ime} ${radnik.prezime}</pre>
     		<h3>Ulogovani ste kao: RADNIK</h3>
     		
     		<form action="${pageContext.request.contextPath}/logout" method="post">
