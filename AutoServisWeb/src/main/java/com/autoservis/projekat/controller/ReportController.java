@@ -37,32 +37,29 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 public class ReportController {
 	
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	
 	@Autowired
-	HttpServletResponse response;
+	private HttpServletResponse response;
 	
 	@Autowired
-	RadnikRepository rr;
+	private RadnikRepository rr;
 	
 	@Autowired
-	PopravkaRepository pr;
+	private PopravkaRepository pr;
 
 	@Autowired
-	UslugaRepository ur;
+	private UslugaRepository ur;
 	
 	@Autowired
-	KlijentRepository kr;
+	private KlijentRepository kr;
 	
 	private OutputStream out = null;
 	
 	@GetMapping("/getDataForIzvestaj")
 	public String getData() {
 		
-		var radnici = rr.findAll()
-				        .stream()
-				        .filter(r -> r.getUloga().getNazivUloge().equals("WORKER"))
-				        .collect(Collectors.toList());
+		var radnici = rr.findByRole("WORKER");
 		
 		request.getSession().setAttribute("radnici", radnici);
 		

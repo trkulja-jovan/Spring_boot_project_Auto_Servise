@@ -15,10 +15,10 @@ import model.Usluga;
 public class UslugaController {
 	
 	@Autowired
-	UslugaRepository ur;
+	private UslugaRepository ur;
 	
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	
 	@PostMapping("/admin/addUsluga")
 	public String addUsluga(String nazUsluge, String cena) {

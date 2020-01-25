@@ -16,13 +16,13 @@ import model.Vlasnik;
 public class KlijentController {
 	
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	
 	@Autowired
-	KlijentRepository kr;
+	private KlijentRepository kr;
 	
 	@Autowired
-	VoziloRepository vr;
+	private VoziloRepository vr;
 	
 	@GetMapping("/worker/klijentiPage")
 	public String klijentiPage() {

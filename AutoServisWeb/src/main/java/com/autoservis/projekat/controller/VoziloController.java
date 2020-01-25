@@ -15,13 +15,13 @@ import model.Vozilo;
 public class VoziloController {
 	
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	
 	@Autowired
-	VoziloRepository vr;
+	private VoziloRepository vr;
 	
 	@Autowired
-	KlijentRepository kr;
+	private KlijentRepository kr;
 	
 	@PostMapping("/worker/addVozilo")
 	public String addVozilo(String marka, String regTab, Integer klijent) {

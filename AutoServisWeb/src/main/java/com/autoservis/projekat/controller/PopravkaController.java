@@ -37,19 +37,19 @@ import model.Vozilo;
 public class PopravkaController {
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 
 	@Autowired
-	PopravkaRepository pr;
+	private PopravkaRepository pr;
 
 	@Autowired
-	VoziloRepository vr;
+	private VoziloRepository vr;
 	
 	@Autowired
-	UslugaRepository ur;
+	private UslugaRepository ur;
 	
 	@Autowired
-	RadnikRepository rr;
+	private RadnikRepository rr;
 
 	@GetMapping("/admin/getPopravke")
 	public String getPopravke() {
@@ -241,7 +241,7 @@ public class PopravkaController {
 			
 			var selektovano = request.getParameterValues("usluge");	
 			
-			if(selektovano == null) {
+			if(selektovano == null || selektovano.length == 0) {
 				request.getSession().setAttribute("greskaPopravka", true);
 				return "greske";
 			}

@@ -18,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
     @Qualifier("customUserDetailsService")
-    UserDetailsService uds;
+    private UserDetailsService uds;
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {

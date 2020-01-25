@@ -19,10 +19,10 @@ import model.Uloga;
 public class RadnikController {    
 	
 	@Autowired
-	RadnikRepository rr;
+	private RadnikRepository rr;
 	
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 	
 	@GetMapping("/admin/radnikPage")
 	public String page() {

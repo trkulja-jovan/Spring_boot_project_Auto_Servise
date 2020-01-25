@@ -19,22 +19,22 @@ import com.autoservis.projekat.session.Session;
 public class GeneralController {
 
 	@Autowired
-	RadnikRepository rr;
+	private RadnikRepository rr;
 
 	@Autowired
-	PopravkaRepository pr;
+	private PopravkaRepository pr;
 
 	@Autowired
-	KlijentRepository kr;
+	private KlijentRepository kr;
 	
 	@Autowired
-	VoziloRepository vr;
+	private VoziloRepository vr;
 	
 	@Autowired
-	UslugaRepository ur;
+	private UslugaRepository ur;
 
 	@Autowired
-	HttpServletRequest request;
+	private HttpServletRequest request;
 
 	@GetMapping("/getAll")
 	public String getAllValues() {
