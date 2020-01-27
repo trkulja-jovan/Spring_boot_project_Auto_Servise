@@ -40,7 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    });
         
         http.formLogin(login -> {
-        	
         	login.loginPage("/pages/login.jsp");
         	login.loginProcessingUrl("/login");
         	login.defaultSuccessUrl("/getAll");

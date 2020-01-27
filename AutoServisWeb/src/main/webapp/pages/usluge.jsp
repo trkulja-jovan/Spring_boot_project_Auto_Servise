@@ -137,5 +137,9 @@
 	<sec:authorize access="!isAuthenticated()">
 		<%@include file="notLogged.jsp"%>
 	</sec:authorize>
+	
+	<sec:authorize access="hasRole('WORKER')">
+		<%@include file="access_denied.jsp"%>
+	</sec:authorize>
 </body>
 </html>

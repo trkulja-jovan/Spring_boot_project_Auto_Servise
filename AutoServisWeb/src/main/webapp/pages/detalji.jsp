@@ -49,7 +49,7 @@
 				<div class="generalije">
   	  				<div class="okvir">
   	  				
-  	  					<h3>Spisak vozila na popravci:</h3>
+  	  					<h3>Vozilo na popravci:</h3>
   	  					<c:forEach var="v" items="${vozila}">
   	  						<h4>${v.marka} ${v.regTablice} -> Vlasnik: ${v.vlasnik.ime} ${v.vlasnik.prezime}</h4>
   	  					</c:forEach>
@@ -60,7 +60,7 @@
   	  			<div class="generalije">
   	  			
   	  				<div class="okvir">
-  	  					<h3>Spisak radnika na popravci:</h3>
+  	  					<h3>Radnik na popravci:</h3>
   	  					<c:forEach var="r" items="${radnici}">
   	  						<h4>${r.ime} ${r.prezime} -> Kvalifikacije: ${r.kvalifikacije}</h4>
   	  					</c:forEach>

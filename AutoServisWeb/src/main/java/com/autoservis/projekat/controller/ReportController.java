@@ -199,9 +199,7 @@ public class ReportController {
 			
 			var jasperReport = JasperCompileManager.compileReport(inputStream);
 			
-			var params = new HashMap<String, Object>();
-			
-			var jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
+			var jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 			
 			response.setContentType("application/x-download");
 			response.addHeader("Content-disposition", "attachment; filename=Usluge.pdf");
@@ -271,11 +269,8 @@ public class ReportController {
 				var dataSource = new JRBeanCollectionDataSource(sviKlijenti);
 				
 				var jasperReport = JasperCompileManager.compileReport(inputStream);
-				
-//				NE DOZVOLJAVA MI BEZ PARAMETARA
-				var params = new HashMap<String, Object>();
 
-				var jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
+				var jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 				
 				response.setContentType("application/x-download");
 				response.addHeader("Content-disposition", "attachment; filename=Svi_Klijenti.pdf");

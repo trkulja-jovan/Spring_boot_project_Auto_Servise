@@ -100,7 +100,14 @@
 							
 									<tr>
 										<td>${d.ime} ${d.prezime}</td>
-										<td>${d.ceka}</td>
+										<td>
+											<c:if test="${d.ceka != 0}">
+												<b style="color: blue;">${d.ceka}</b>
+											</c:if>
+											<c:if test="${d.ceka == 0}">
+												${d.ceka}
+											</c:if>
+										</td>
 										<td>${d.u_procesu}</td>
 										<td>${d.zavrsene}</td>
 									</tr>

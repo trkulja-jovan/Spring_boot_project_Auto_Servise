@@ -75,7 +75,7 @@ public class RadnikController {
 			return "greske";
 		}
 		
-		return "redirect:/admin/radnikPage";
+		return "redirect:/admin/getRadnici";
 	}
 	
 	@GetMapping("/admin/getRadniks")
