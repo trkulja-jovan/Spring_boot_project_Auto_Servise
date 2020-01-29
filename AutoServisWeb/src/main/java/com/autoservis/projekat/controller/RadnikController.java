@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,24 +17,30 @@ import model.Uloga;
 
 @Controller
 @RequestMapping("/")
-public class RadnikController {    
-	
+public class RadnikController {
+
 	@Autowired
 	private RadnikRepository rr;
-	
+
 	@Autowired
 	private HttpServletRequest request;
-	
+
+	@ExceptionHandler(Exception.class)
+	public String returnErr() {
+		request.getSession().setAttribute("greskaRadnik", true);
+		return "greske";
+	}
+
 	@GetMapping("/admin/radnikPage")
 	public String page() {
 		return "zaposleni";
 	}
-	
+
 	@GetMapping("/admin/getRadnici")
 	public String getRadnikPodaci() {
-		
+
 		var radnici = rr.findByRole("WORKER");
-		
+
 		request.getSession().setAttribute("zaposleni", radnici);
 
 		return "zaposleni";
@@ -41,55 +48,47 @@ public class RadnikController {
 
 	@PostMapping("/admin/registerWorker")
 	public String dodajRadnika(String ime, String prezime, String kvalif, String korIme, String password) {
-		
-		try {
-			
-			var postojiR = rr.findByKorIme(korIme);
-			
-			if(postojiR != null) {
-				request.getSession().setAttribute("greskaRadnik", true);
-				return "greske";
-			}
-			
-			var r = new Radnik();
-			
-			r.setIme(ime);
-			r.setPrezime(prezime);
-			r.setKvalifikacije(kvalif);
-			r.setKorIme(korIme);
-			
-			var passwordEncoder = new BCryptPasswordEncoder();
-			r.setPassword(passwordEncoder.encode(password));
-			
-			var u = new Uloga();
-			u.setIdUloga(2);
-			r.setUloga(u);
-			
-			rr.save(r);
-			
-			request.getSession().setAttribute("uspesno", true);
 
-		} catch(Exception e) {
-			e.printStackTrace();
+		var postojiR = rr.findByKorIme(korIme);
+
+		if (postojiR != null) {
 			request.getSession().setAttribute("greskaRadnik", true);
 			return "greske";
 		}
-		
+
+		var r = new Radnik();
+
+		r.setIme(ime);
+		r.setPrezime(prezime);
+		r.setKvalifikacije(kvalif);
+		r.setKorIme(korIme);
+
+		var passwordEncoder = new BCryptPasswordEncoder();
+		r.setPassword(passwordEncoder.encode(password));
+
+		var u = new Uloga();
+		u.setIdUloga(2);
+		r.setUloga(u);
+
+		rr.save(r);
+
+		request.getSession().setAttribute("uspesno", true);
+
 		return "redirect:/admin/getRadnici";
 	}
-	
+
 	@GetMapping("/admin/getRadniks")
 	public String getRadniks() {
-		
+
 		var id = (Integer) request.getSession().getAttribute("id");
-		
+
 		var radniciNaPopravci = rr.getRadniks(id);
-		
-		if(radniciNaPopravci != null)
+
+		if (radniciNaPopravci != null)
 			request.getSession().setAttribute("radnici", radniciNaPopravci);
-		
+
 		return "redirect:/admin/getUslugeForDetalji";
-		
+
 	}
 
 }

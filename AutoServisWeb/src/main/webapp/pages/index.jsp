@@ -110,11 +110,7 @@
   				</div>
   			
   			</c:if>
-  			
-  			<c:if test="${empty popravkeCekanje}">
-  				<h3 class="uspeloh3">Nemate popravki na čekanju za odobrenje</h3>
-  			</c:if>
-  			
+
   			<c:if test="${uspesnoOdobreno}">
   				<h3 class="uspeloh3">Uspešno ste odobrili rad.</h3>
 				<c:remove var = "uspesnoOdobreno"/>
@@ -152,55 +148,41 @@
     			
     			<pre><br><br></pre>
     		</c:if>
-    		
-    		<c:if test="${empty mojePopravkeCeka}">
-  				<h3 class="uspeloh3">Nemate popravki na čekanju za odobrenje</h3>
-  				<pre><br><br></pre>
-  			</c:if>
   			
 			<c:if test="${not empty mojePopravkeOdobreno}">
     			
     			<h3>Odobrene popravke:</h3>
     			<div class="forma" id="form">
-    			<form action="${pageContext.request.contextPath}/worker/changePopravkaData" method="post"
-    				  class="form-register">
+    				<form action="${pageContext.request.contextPath}/worker/changePopravkaData" method="post"
+    				 	 class="form-register">
     			
-    				<table id="workerTable">
+    					<table id="workerTable">
     					
-    					<c:forEach var="p" items="${mojePopravkeOdobreno}">
-  								<tr>
-  									<td>
-  										<label>${p.opisPopravke} | ${p.datumPrijema} | ${p.status.opis}</label> 
-  										<input type="hidden" name="idPopravka" value="${p.idPopravka}">
-  									</td>
+    						<c:forEach var="p" items="${mojePopravkeOdobreno}">
+  									<tr>
+  										<td>
+  											<label>${p.opisPopravke} | ${p.datumPrijema} | ${p.status.opis}</label> 
+  											<input type="hidden" name="idPopravka" value="${p.idPopravka}">
+  										</td>
   									
-  									<td>
-  										<input type="submit" value="Započni rad">
-  									</td>
-  								</tr>
-  						</c:forEach>
+  										<td>
+  											<input type="submit" value="Započni rad">
+  										</td>
+  									</tr>
+  							</c:forEach>
     					
-    					<tr>
-							<td>
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" /> 
-							</td>
-						</tr>
+    						<tr>
+								<td>
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+								</td>
+							</tr>
     				
-    				</table>
+    					</table>
     			
-    			</form>
+    				</form>
     			</div>
     		</c:if>
 
-    		<c:if test="${empty mojePopravkeOdobreno}">
-  				<h3 class="uspeloh3">Nemate odobrenih popravki</h3>
-  			</c:if>
-  			
-    		<c:if test="${uspesnoZapoceto}">
-  				<h3 class="uspeloh3">Možete početi rad. Srećno!</h3>
-				<c:remove var = "uspesnoZapoceto"/>
-  			</c:if>
     	</div>
     </div>
   </sec:authorize>

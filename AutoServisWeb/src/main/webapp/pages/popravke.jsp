@@ -131,7 +131,7 @@
 			<div class="content-wrapper">
 			
 				<div class="naslov">
-					<h3>Prikaz popravki za radnika: ${radnik.ime} ${radnik.prezime}</h3>
+					<h3>Prikaz popravki za radnika: <b style="color: black">${radnik.ime} ${radnik.prezime}</b></h3>
 				</div>
 			
 				<div class="tabela">

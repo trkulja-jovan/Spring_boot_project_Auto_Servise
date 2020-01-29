@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -20,6 +21,12 @@ public class UslugaController {
 	@Autowired
 	private HttpServletRequest request;
 	
+	@ExceptionHandler(NumberFormatException.class)
+	public String returnErr() {
+		request.getSession().setAttribute("greskaUsluga", true);
+		return "greske";
+	}
+	
 	@PostMapping("/admin/addUsluga")
 	public String addUsluga(String nazUsluge, String cena) {
 		
@@ -29,18 +36,9 @@ public class UslugaController {
 			request.getSession().setAttribute("greskaUsluga", true);
 			return "greske";
 		}
-		
-		usluga = null;
-		
-		var parsCena = 0.0;
-		
-		try {
-			parsCena = Double.parseDouble(cena);
-		} catch(NumberFormatException nfe) {
-			request.getSession().setAttribute("greskaUsluga", true);
-			return "greske";
-		}
-		
+
+		var parsCena = Double.parseDouble(cena);
+
 		var u = new Usluga();
 		
 		u.setCena(parsCena);

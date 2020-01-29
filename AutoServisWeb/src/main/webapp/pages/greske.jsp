@@ -13,7 +13,7 @@
 	
 	<meta charset="UTF-8">
 	
-	<title>Form error</title>
+	<title>Error page</title>
 </head>
 <body>
 	
@@ -23,7 +23,7 @@
 			<div class="error-main">
 				<h1>Oops!</h1>
 				<div class="error-heading">500</div>
-				<p>Greška prilikom dodavanja usluge. <br> Proverite podatke!</p>
+				<p>Došlo je do greške prilikom dodavanja usluge. <br> Proverite podatke!</p>
 				<p><a href="/AutoServis/admin/refreshData">Povratak na početnu stranicu</a></p>
 				<c:remove var = "greskaUsluga"/>
 			</div>
@@ -33,7 +33,7 @@
 			<div class="error-main">
 				<h1>Oops!</h1>
 				<div class="error-heading">500</div>
-				<p>Greška prilikom dodavanja radnika. <br> Proverite podatke!</p>
+				<p>Došlo je do greške prilikom dodavanja radnika. <br> Proverite podatke!</p>
 				<p><a href="/AutoServis/admin/refreshData">Povratak na početnu stranicu</a></p>
 				<c:remove var = "greskaRadnik"/>
 			</div>
@@ -43,7 +43,7 @@
 			<div class="error-main">
 				<h1>Oops!</h1>
 				<div class="error-heading">500</div>
-				<p>Greška prilikom dodavanja klijenta. <br> Proverite podatke!</p>
+				<p>Došlo je do greške prilikom dodavanja klijenta. <br> Proverite podatke!</p>
 				<p><a href="/AutoServis/worker/refreshData">Povratak na početnu stranicu</a></p>
 				<c:remove var = "greskaKlijent"/>
 			</div>
@@ -53,7 +53,7 @@
 			<div class="error-main">
 				<h1>Oops!</h1>
 				<div class="error-heading">500</div>
-				<p>Greška prilikom dodavanja vozila. <br> Proverite podatke!</p>
+				<p>Došlo je do greške prilikom dodavanja vozila. <br> Proverite podatke!</p>
 				<p><a href="/AutoServis/worker/refreshData">Povratak na početnu stranicu</a></p>
 				<c:remove var = "greskaVozilo"/>
 			</div>
@@ -63,7 +63,7 @@
 			<div class="error-main">
 				<h1>Oops!</h1>
 				<div class="error-heading">500</div>
-				<p>Greška prilikom dodavanja popravke. <br> Proverite podatke!</p>
+				<p>Došlo je do greške prilikom dodavanja popravke. <br> Proverite podatke!</p>
 				<p><a href="/AutoServis/worker/refreshData">Povratak na početnu stranicu</a></p>
 				<c:remove var = "greskaPopravka"/>
 			</div>
@@ -73,7 +73,7 @@
 			<div class="error-main">
 				<h1>Oops!</h1>
 				<div class="error-heading">500</div>
-				<p>Greška prilikom generisanja izveštaja. <br></p>
+				<p>Došlo je do greške prilikom generisanja izveštaja. <br></p>
 				<p><a href="/AutoServis/admin/refreshData">Povratak na početnu stranicu</a></p>
 				<c:remove var = "greskaIzvestaj"/>
 			</div>
